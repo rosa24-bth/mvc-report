@@ -54,4 +54,40 @@ class CardController extends AbstractController
 
         return $this->render('card/deck.html.twig', $data);
     }
+
+    #[Route("/card/deck/shuffle", name: "card_deck_shuffle")]
+    public function shuffle(SessionInterface $session): Response
+    {
+        $deck = new \App\Card\DeckOfCards();
+        $deck->shuffle();
+
+        $session->set("card_deck", $deck);
+
+        $data = [
+            "cards" => $deck->getCards()
+        ];
+
+        return $this->render('card/deck.html.twig', $data);
+    }
+
+    #[Route("/card/deck/draw", name: "card_deck_draw")]
+    public function draw(SessionInterface $session): Response
+    {
+        $deck = $session->get("card_deck");
+
+        if (!$deck) {
+            $deck = new \App\Card\DeckOfCards();
+        }
+
+        $card = $deck->drawCard();
+
+        $session->set("card_deck", $deck);
+
+        $data = [
+            "card" => $card,
+            "remaining" => count($deck->getCards())
+        ];
+
+        return $this->render('card/draw.html.twig', $data);
+    }
 }

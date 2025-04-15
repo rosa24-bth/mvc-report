@@ -17,4 +17,9 @@ class CardGraphic
     {
         return "{$this->rank}{$this->suit}";
     }
+
+    public function __toString(): string
+    {
+        return $this->getAsString();
+    }
 }

@@ -22,4 +22,14 @@ class DeckOfCards
     {
         return $this->cards;
     }
+
+    public function shuffle(): void
+    {
+        shuffle($this->cards);
+    }
+
+    public function drawCard()
+    {
+        return array_pop($this->cards);
+    }
 }
