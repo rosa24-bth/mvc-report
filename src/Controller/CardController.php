@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Card\DeckOfCards;
 
 class CardController extends AbstractController
 {
@@ -38,5 +39,19 @@ class CardController extends AbstractController
         );
 
         return $this->redirectToRoute('card_session');
+    }
+
+    #[Route("/card/deck", name: "card_deck")]
+    public function deck(SessionInterface $session): Response
+    {
+        $deck = new \App\Card\DeckOfCards();
+
+        $session->set("card_deck", $deck);
+
+        $data = [
+            "cards" => $deck->getCards()
+        ];
+
+        return $this->render('card/deck.html.twig', $data);
     }
 }

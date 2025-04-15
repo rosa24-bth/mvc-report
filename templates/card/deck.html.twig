@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kortlek{% endblock %}
+
+{% block body %}
+<h1>Hela kortleken</h1>
+
+<p>Här är alla kort, sorterade efter färg och värde.</p>
+
+<ul>
+{% for card in cards %}
+    <li>{{ card }}</li>
+{% endfor %}
+</ul>
+
+<p><a href="{{ path('card_index') }}">Tillbaka</a></p>
+{% endblock %}
