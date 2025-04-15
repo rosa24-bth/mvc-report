@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Dra flera kort{% endblock %}
+
+{% block body %}
+<h1>Dra {{ cards|length }} kort</h1>
+
+<p>Du drog:</p>
+<p>
+    {% for card in cards %}
+        {{ card }}
+    {% endfor %}
+</p>
+
+<p>Kort kvar i leken: {{ remaining }}</p>
+
+<p><a href="{{ path('card_deck_draw_number', { number: 3 }) }}">Dra tre till</a></p>
+<p><a href="{{ path('card_deck_draw') }}">Dra ett kort</a></p>
+<p><a href="{{ path('card_deck_shuffle') }}">Blanda om kortleken</a></p>
+{% endblock %}

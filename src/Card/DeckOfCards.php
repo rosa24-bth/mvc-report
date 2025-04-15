@@ -9,11 +9,11 @@ class DeckOfCards
     public function __construct()
     {
         $suits = ['♠', '♥', '♦', '♣'];
-        $ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        $values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
         foreach ($suits as $suit) {
-            foreach ($ranks as $rank) {
-                $this->cards[] = new CardGraphic($rank, $suit);
+            foreach ($values as $value) {
+                $this->cards[] = new CardGraphic($value, $suit);
             }
         }
     }
@@ -21,6 +21,17 @@ class DeckOfCards
     public function getCards(): array
     {
         return $this->cards;
+    }
+
+    public function getCardsAsString(): array
+    {
+        $strings = [];
+
+        foreach ($this->cards as $card) {
+            $strings[] = (string) $card;
+        }
+
+        return $strings;
     }
 
     public function shuffle(): void
@@ -31,5 +42,19 @@ class DeckOfCards
     public function drawCard()
     {
         return array_pop($this->cards);
+    }
+
+    public function drawCards(int $number): array
+    {
+        $drawn = [];
+
+        for ($i = 0; $i < $number; $i++) {
+            $card = array_pop($this->cards);
+            if ($card !== null) {
+                $drawn[] = $card;
+            }
+        }
+
+        return $drawn;
     }
 }

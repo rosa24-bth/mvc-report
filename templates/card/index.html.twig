@@ -5,7 +5,19 @@
 {% block body %}
 <h1>Kortspel</h1>
 
-<p>Detta är landningssidan för kortspelet.</p>
+<p>Landningssida för kortspelet.</p>
 <p><a href="{{ path('card_session') }}">Visa sessionsdata</a></p>
 <p><a href="{{ path('card_deck_shuffle') }}">Blanda kortleken</a></p>
+
+<br>
+
+<h2>Om klasserna</h2>
+<p>Det finns följande klasser:</p>
+<ul>
+    <li><strong>Card</strong> – Representerar ett spelkort med färg och valör.</li>
+    <li><strong>CardGraphic</strong> – Ärver från Card och lägger till en visuell representation för kortet.</li>
+    <li><strong>DeckOfCards</strong> – Använder komposition för att bygga en kortlek av CardGraphic-objekt.</li>
+    <li><strong>CardHand</strong> – Representerar en hand med kort. </li>
+</ul>
+<img src="{{ asset('build/images/uml_mvc_card.png') }}" alt="UML för kortspel" class="uml-image">
 {% endblock %}

@@ -152,3 +152,9 @@ footer {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
+
+.uml-image {
+    border: 2px solid;
+    display: block;
+    margin: 1rem auto;
+}

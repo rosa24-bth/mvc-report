@@ -2,22 +2,8 @@
 
 namespace App\Card;
 
-class CardGraphic
+class CardGraphic extends Card
 {
-    private string $rank;
-    private string $suit;
-
-    public function __construct(string $rank, string $suit)
-    {
-        $this->rank = $rank;
-        $this->suit = $suit;
-    }
-
-    public function getAsString(): string
-    {
-        return "{$this->rank}{$this->suit}";
-    }
-
     public function __toString(): string
     {
         return $this->getAsString();

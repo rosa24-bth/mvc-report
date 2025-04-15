@@ -90,4 +90,25 @@ class CardController extends AbstractController
 
         return $this->render('card/draw.html.twig', $data);
     }
+
+    #[Route("/card/deck/draw/{number<\d+>}", name: "card_deck_draw_number")]
+    public function drawNumber(int $number, SessionInterface $session): Response
+    {
+        $deck = $session->get("card_deck");
+
+        if (!$deck) {
+            $deck = new DeckOfCards();
+        }
+
+        $cards = $deck->drawCards($number);
+
+        $session->set("card_deck", $deck);
+
+        $data = [
+            "cards" => $cards,
+            "remaining" => count($deck->getCards())
+        ];
+
+        return $this->render('card/draw_number.html.twig', $data);
+    }
 }
