@@ -5,10 +5,42 @@
 {% block body %}
     <h1>Spelet 21</h1>
 
-    <p>Välkommen till spelet! Här kommer du kunna spela mot banken i en kamp om att komma så nära 21 som möjligt utan att gå över.</p>
+    <h2>Din hand:</h2>
+    <p>
+        {% for card in playerHand %}
+            {{ card }}
+        {% endfor %}
+    </p>
 
-    <p>Klicka på knappen nedan för att starta en ny spelrunda.</p>
+    <p><strong>Poäng:</strong> {{ playerScore }}</p>
+    <p><strong>Kort kvar i leken:</strong> {{ remaining }}</p>
 
-    <a href="{{ path('game_play') }}" class="btn btn-primary">Starta spel</a>
+    {% if gameOver %}
+        <h2>Resultat</h2>
+        <p><strong>{{ result }}</strong></p>
 
+        {% if bankHand is defined %}
+            <h3>Bankens hand:</h3>
+            <ul>
+                {% for card in bankHand %}
+                    <li>{{ card.getAsString() }}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Bankens poäng:</strong> {{ bankScore }}</p>
+        {% endif %}
+
+        <form action="{{ path('game_reset') }}" method="post">
+            <button class="btn btn-primary">Starta om spelet</button>
+        </form>
+    {% else %}
+        <form action="{{ path('game_draw') }}" method="post"">
+            <button class="btn btn-success">Dra kort</button>
+        </form>
+
+        <form action="{{ path('game_stay') }}" method="post"">
+            <button class="btn btn-warning">Stanna</button>
+        </form>
+    {% endif %}
+
+    <p><a href="{{ path('game_home') }}">Tillbaka till startsidan</a></p>
 {% endblock %}
