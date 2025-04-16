@@ -44,7 +44,7 @@ class CardController extends AbstractController
     #[Route("/card/deck", name: "card_deck")]
     public function deck(SessionInterface $session): Response
     {
-        $deck = new \App\Card\DeckOfCards();
+        $deck = new DeckOfCards();
 
         $session->set("card_deck", $deck);
 
@@ -58,7 +58,7 @@ class CardController extends AbstractController
     #[Route("/card/deck/shuffle", name: "card_deck_shuffle")]
     public function shuffle(SessionInterface $session): Response
     {
-        $deck = new \App\Card\DeckOfCards();
+        $deck = new DeckOfCards();
         $deck->shuffle();
 
         $session->set("card_deck", $deck);
@@ -76,7 +76,7 @@ class CardController extends AbstractController
         $deck = $session->get("card_deck");
 
         if (!$deck) {
-            $deck = new \App\Card\DeckOfCards();
+            $deck = new DeckOfCards();
         }
 
         $card = $deck->drawCard();
