@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The making of – kortspelet 21{% endblock %}
+
+{% block body %}
+    <h1>The making of – kortspelet 21</h1>
+
+    <h2>Spelflöde (pseudokod)</h2>
+    <pre>
+<strong>Starta spelrunda</strong>
+
+Skapa en ny kortlek
+Blanda kortleken
+Dra två kort till spelaren
+
+Om spelarens poäng är under 21 och spelaren vill dra nytt kort:
+    Dra ett kort till spelaren
+    Kontrollera totalpoängen
+    Om spelarens poäng är över 21:
+        Banken vinner
+        Avsluta spelet
+
+Om spelaren stannar:
+    Gå vidare till bankens tur
+
+
+<strong>Starta bankens tur</strong>
+
+Dra två kort till banken
+
+Om bankens poäng är under 17:
+    Dra ett kort till banken
+
+Om bankens poäng är över 21:
+    Spelaren vinner
+    Avsluta spelet
+
+Annars:
+    Gå vidare till poängjämförelse
+
+
+<strong>Jämför spelarens och bankens poäng</strong>
+
+Om spelaren har över 21:
+    Banken vinner
+Om banken har över 21:
+    Spelaren vinner
+Om banken har mer än eller lika med spelaren:
+    Banken vinner
+    </pre>
+
+    <br>
+
+    <h2>Beskrivningar av klasser</h2>
+    <ul>
+        <li><strong>Card</strong> – Representerar ett enskilt kort med färg och valör.</li>
+        <li><strong>CardHand</strong> – Hanterar en hand för spelaren och banken.</li>
+        <li><strong>DeckOfCards</strong> – Representerar hela kortleken.</li>
+        <li><strong>TwentyOneGame</strong> – Sköter spelets logik.</li>
+        <li><strong>TwentyOneController</strong> – Controller som hanterar routes, session och rendering av templates.</li>
+    </ul>
+
+    <br>
+
+    <h2>Flödesschema</h2>
+    <img src="{{ asset('build/images/flowchart_21.drawio.png') }}" alt="Flödesschema för kortspelet 21" class="uml-image">
+
+    <br>
+
+    <p><a href="{{ path('game_home') }}">Tillbaka till spelets startsida</a></p>
+{% endblock %}

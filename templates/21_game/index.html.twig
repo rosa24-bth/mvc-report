@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kortspelet 21{% endblock %}
+
+{% block body %}
+    <h1>Välkommen att spela kortspelet 21</h1>
+
+    <p>
+        Målet med spelet är att komma så nära 21 som möjligt utan att gå över. Det bästa är om du lyckas pricka exakt 21.
+        Du spelar mot banken och du börjar. På din tur får dra kort ett i taget. Om du hamnar över 21 så förlorar du direkt.
+        När du väljer att stanna så är det bankens tur. Banken drar kort tills den når minst 17.
+        Den som kommer närmast 21 vinner!
+    </p>
+
+    <a href="{{ path('game_play') }}" class="btn btn-primary">Starta spelet</a>
+
+    <p>
+        <a href="{{ path('game_doc') }}">Läs mer om hur jag byggt spelet</a>
+    </p>
+{% endblock %}

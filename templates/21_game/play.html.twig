@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spela 21{% endblock %}
+
+{% block body %}
+    <h1>Spelet 21</h1>
+
+    <p>Välkommen till spelet! Här kommer du kunna spela mot banken i en kamp om att komma så nära 21 som möjligt utan att gå över.</p>
+
+    <p>Klicka på knappen nedan för att starta en ny spelrunda.</p>
+
+    <a href="{{ path('game_play') }}" class="btn btn-primary">Starta spel</a>
+
+{% endblock %}
