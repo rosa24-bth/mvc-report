@@ -60,7 +60,6 @@ class TwentyOneController extends AbstractController
     #[Route("/game/draw", name: "game_draw", methods: ["POST"])]
     public function gameDraw(SessionInterface $session): Response
     {
-        /** @var TwentyOneGame $game */
         $game = $session->get("game");
         $game->drawCard();
 
@@ -72,7 +71,6 @@ class TwentyOneController extends AbstractController
     #[Route("/game/stay", name: "game_stay", methods: ["POST"])]
     public function gameStay(SessionInterface $session): Response
     {
-        /** @var TwentyOneGame $game */
         $game = $session->get("game");
 
         $bank = new Bank();
@@ -83,6 +81,10 @@ class TwentyOneController extends AbstractController
             $game->getPlayerScore(),
             $bank->getScore()
         );
+
+        // Save bank and result in session for API.
+        $session->set("bank", $bank);
+        $session->set("result", $result);
 
         return $this->render('21_game/play.html.twig', [
             "playerHand" => $game->getPlayerHand()->getCards(),
@@ -99,6 +101,8 @@ class TwentyOneController extends AbstractController
     public function gameReset(SessionInterface $session): Response
     {
         $session->remove("game");
+        $session->remove("bank");
+        $session->remove("result");
 
         return $this->redirectToRoute("game_play");
     }

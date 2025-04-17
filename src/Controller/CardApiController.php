@@ -19,6 +19,7 @@ class CardApiController extends AbstractController
             'POST /api/deck/shuffle' => 'Blandar kortleken och returnerar den.',
             'POST /api/deck/draw' => 'Drar ett kort från kortleken.',
             'POST /api/deck/draw/:number' => 'Drar flera kort från kortleken.',
+            'GET /api/game' => 'Här får du den aktuella ställningen i spelet.',
         ];
 
         return $this->render('card/api.html.twig', ['routes' => $routes]);
@@ -90,5 +91,52 @@ class CardApiController extends AbstractController
             "drawn" => $cardStrings,
             "remaining" => count($deck->getCards())
         ]);
+    }
+
+    #[Route("/api/game", name: "api_game", methods: ["GET"])]
+    public function apiGame(SessionInterface $session): JsonResponse
+    {
+        $game = $session->get("game");
+        $bank = $session->get("bank");
+        $result = $session->get("result");
+
+        if (!$game) {
+            return $this->json([
+                "error" => "Spelet har inte startats ännu."
+            ]);
+        }
+
+        // Get player hand.
+        $playerHand = $game->getPlayerHand()->getCards();
+        $playerCards = [];
+        foreach ($playerHand as $card) {
+            $playerCards[] = (string) $card;
+        }
+        $playerScore = $game->getPlayerScore();
+
+        $response = [
+            "player" => [
+                "cards" => $playerCards,
+                "score" => $playerScore
+            ]
+        ];
+
+        // If game is over then show bank aswell.
+        if ($bank && $result) {
+            $bankHand = $bank->getHand()->getCards();
+            $bankCards = [];
+            foreach ($bankHand as $card) {
+                $bankCards[] = (string) $card;
+            }
+
+            $response["bank"] = [
+                "cards" => $bankCards,
+                "score" => $bank->getScore()
+            ];
+
+            $response["result"] = $result;
+        }
+
+        return $this->json($response);
     }
 }

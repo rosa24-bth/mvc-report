@@ -1,23 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Spela 21{% endblock %}
+{% block title %}Spela kortspelet 21{% endblock %}
 
 {% block body %}
-    <h1>Spelet 21</h1>
+    <h1>Kortspelet 21</h1>
 
-    <h2>Din hand:</h2>
+    <h2>Här är din hand:</h2>
     <p>
         {% for card in playerHand %}
             {{ card }}
         {% endfor %}
     </p>
 
-    <p><strong>Poäng:</strong> {{ playerScore }}</p>
-    <p><strong>Kort kvar i leken:</strong> {{ remaining }}</p>
+    <p><strong>Din nuvarande poäng:</strong> {{ playerScore }}</p>
+    <p><strong>Antal kort kvar i leken:</strong> {{ remaining }}</p>
 
     {% if gameOver %}
         <h2>Resultat</h2>
-        <p><strong>{{ result }}</strong></p>
 
         {% if bankHand is defined %}
             <h3>Bankens hand:</h3>
@@ -29,9 +28,14 @@
             <p><strong>Bankens poäng:</strong> {{ bankScore }}</p>
         {% endif %}
 
+        <div class="result-message">
+            <strong>{{ result }}</strong>
+        </div>
+
         <form action="{{ path('game_reset') }}" method="post">
             <button class="btn btn-primary">Starta om spelet</button>
         </form>
+
     {% else %}
         <form action="{{ path('game_draw') }}" method="post"">
             <button class="btn btn-success">Dra kort</button>
