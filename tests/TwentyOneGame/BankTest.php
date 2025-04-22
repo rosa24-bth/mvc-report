@@ -32,7 +32,7 @@ class BankTest extends TestCase
     }
 
     /**
-     * Test if getScore() returns an integer.
+     * Test if getScore() returns a reasonable score value.
      */
     public function testBankScoreReturnsInteger()
     {
@@ -42,6 +42,7 @@ class BankTest extends TestCase
         $bank->playTurn($deck);
 
         $score = $bank->getScore();
-        $this->assertIsInt($score);
+        $this->assertGreaterThanOrEqual(0, $score);
+        $this->assertLessThanOrEqual(100, $score);
     }
 }
