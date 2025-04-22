@@ -3,6 +3,7 @@
 namespace App\TwentyOneGame;
 
 use PHPUnit\Framework\TestCase;
+use App\Card\DeckOfCards;
 
 /**
  * Test cases for class Bank.
@@ -24,7 +25,7 @@ class BankTest extends TestCase
     public function testBankPlayTurnDrawsAtLeastTwoCards()
     {
         $bank = new Bank();
-        $deck = new \App\Card\DeckOfCards();
+        $deck = new DeckOfCards();
         $deck->shuffle();
         $bank->playTurn($deck);
         $this->assertGreaterThanOrEqual(2, count($bank->getHand()->getCards()));
@@ -36,7 +37,7 @@ class BankTest extends TestCase
     public function testBankScoreReturnsInteger()
     {
         $bank = new Bank();
-        $deck = new \App\Card\DeckOfCards();
+        $deck = new DeckOfCards();
         $deck->shuffle();
         $bank->playTurn($deck);
 

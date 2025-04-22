@@ -27,7 +27,6 @@ class DiceGraphicTest extends TestCase
         $die->roll();
         $symbol = $die->getAsString();
 
-        $this->assertIsString($symbol);
         $this->assertStringContainsString($symbol, "⚀⚁⚂⚃⚄⚅");
     }
 }
