@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
  * Test cases for class GameOVer. Including warning suppression for phpmd since using static
  * function in GameOver class is reasonable.
  *
- * @SuppressWarnings(PHPMD.StaticAccess)
+ * @SuppressWarnings("PHPMD.StaticAccess")
  */
 class GameOverTest extends TestCase
 {
