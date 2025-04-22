@@ -4,7 +4,7 @@ namespace App\Dice;
 
 class Dice
 {
-    protected int $value;
+    protected int $value = 0;
 
     public function roll(): int
     {

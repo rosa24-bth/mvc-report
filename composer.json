@@ -98,7 +98,9 @@
             "@phpmd",
             "@phpstan",
             "@csfix:dry"
-        ]
+        ],
+        "phpdoc": "tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml",
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit"
     },
     "conflict": {
         "symfony/symfony": "*"

@@ -2,6 +2,11 @@
 
 namespace App\Card;
 
+/**
+ * Class Card
+ *
+ * Representing av game card with typical values and suit.
+ */
 class Card
 {
     private string $value;
