@@ -43,14 +43,15 @@ class TwentyOneGameTest extends TestCase
     }
 
     /**
-     * Check that getPlayerScore() returns an int.
+     * Check that getPlayerScore() returns a reasonable value.
      */
-    public function testPlayerScoreIsInt()
+    public function testPlayerScoreIsWithinExpectedRange()
     {
         $game = new TwentyOneGame();
         $game->startGame();
         $score = $game->getPlayerScore();
-        $this->assertIsInt($score);
+        $this->assertGreaterThanOrEqual(0, $score);
+        $this->assertLessThanOrEqual(100, $score);
     }
 
     /**
