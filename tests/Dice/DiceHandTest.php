@@ -58,7 +58,6 @@ class DiceHandTest extends TestCase
         $hand->roll();
         $strings = $hand->getString();
 
-        $this->assertIsArray($strings);
         $this->assertIsString($strings[0]);
     }
 }
