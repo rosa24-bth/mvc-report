@@ -21,4 +21,37 @@ class DiceTest extends TestCase
         $res = $die->getAsString();
         $this->assertNotEmpty($res);
     }
+
+    /**
+     * Roll the dice and assert that the value is between 1 and 6.
+     */
+    public function testRoll()
+    {
+        $die = new Dice();
+        $value = $die->roll();
+        $this->assertIsInt($value);
+        $this->assertGreaterThanOrEqual(1, $value);
+        $this->assertLessThanOrEqual(6, $value);
+    }
+
+    /**
+     * Roll the dice and verify that getValue() returns the same as roll().
+     */
+    public function testGetValue()
+    {
+        $die = new Dice();
+        $rolled = $die->roll();
+        $this->assertEquals($rolled, $die->getValue());
+    }
+
+    /**
+     * Roll the dice and verify that getAsString() returns a string with the value.
+     */
+    public function testGetAsString()
+    {
+        $die = new Dice();
+        $rolled = $die->roll();
+        $expected = "[{$rolled}]";
+        $this->assertEquals($expected, $die->getAsString());
+    }
 }
