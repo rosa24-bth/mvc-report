@@ -29,8 +29,18 @@ class CardHand
         foreach ($this->hand as $card) {
             $value = $card->getValue();
 
-            if (in_array($value, ['J', 'Q', 'K'])) {
-                $total += 10;
+            if ($value === 'J') {
+                $total += 11;
+                continue;
+            }
+
+            if ($value === 'Q') {
+                $total += 12;
+                continue;
+            }
+
+            if ($value === 'K') {
+                $total += 13;
                 continue;
             }
 
