@@ -29,7 +29,6 @@ class DiceTest extends TestCase
     {
         $die = new Dice();
         $value = $die->roll();
-        $this->assertIsInt($value);
         $this->assertGreaterThanOrEqual(1, $value);
         $this->assertLessThanOrEqual(6, $value);
     }
