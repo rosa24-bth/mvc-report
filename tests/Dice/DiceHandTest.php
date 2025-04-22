@@ -15,7 +15,7 @@ class DiceHandTest extends TestCase
     public function testCreateDiceHand()
     {
         $hand = new DiceHand();
-        $this->assertInstanceOf(DiceHand::class, $hand);
+        $this->assertInstanceOf("App\Dice\DiceHand", $hand);
         $this->assertEquals(0, $hand->getNumberDices());
     }
     /**

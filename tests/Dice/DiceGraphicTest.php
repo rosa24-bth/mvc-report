@@ -15,7 +15,7 @@ class DiceGraphicTest extends TestCase
     public function testIsSubclassOfDice()
     {
         $die = new DiceGraphic();
-        $this->assertInstanceOf(Dice::class, $die);
+        $this->assertInstanceOf("App\Dice\DiceGraphic", $die);
     }
 
     /**
@@ -24,10 +24,10 @@ class DiceGraphicTest extends TestCase
     public function testGetAsStringReturnsDiceSymbol()
     {
         $die = new DiceGraphic();
-        $rolled = $die->roll();
+        $die->roll();
         $symbol = $die->getAsString();
 
         $this->assertIsString($symbol);
-        $this->assertStringContainsString($symbol, '⚀⚁⚂⚃⚄⚅');
+        $this->assertStringContainsString($symbol, "⚀⚁⚂⚃⚄⚅");
     }
 }
