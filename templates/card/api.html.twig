@@ -6,8 +6,12 @@
 <h1>API-översikt</h1>
 
 <ul>
-    {% for route, description in routes %}
-        <li><strong>{{ route }}</strong>: {{ description }}</li>
+    {% for route in routes %}
+        <li>
+            <strong>{{ route.method }}</strong>
+            <a href="{{ route.path }}" target="_blank">{{ route.path }}</a>:
+            {{ route.description }}
+        </li>
     {% endfor %}
 </ul>
 {% endblock %}

@@ -13,5 +13,14 @@
     <p>No data in session.</p>
 {% endif %}
 
+{% if cards is not empty %}
+    <h2>Kortlek</h2>
+    <p>
+        {% for card in cards %}
+            {{ card|raw }}
+        {% endfor %}
+    </p>
+{% endif %}
+
 <p><a href="{{ path('card_session_delete') }}">Rensa sessionen</a></p>
 {% endblock %}

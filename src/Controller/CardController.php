@@ -21,8 +21,16 @@ class CardController extends AbstractController
     {
         $sessionData = $session->all();
 
+        $deck = $session->get("card_deck");
+        if ($deck) {
+            $cards = $deck->getCards();
+        } else {
+            $cards = [];
+        }
+
         $data = [
-            'session' => $sessionData
+            'session' => $sessionData,
+            'cards' => $cards
         ];
 
         return $this->render('card/session.html.twig', $data);
@@ -44,9 +52,12 @@ class CardController extends AbstractController
     #[Route("/card/deck", name: "card_deck")]
     public function deck(SessionInterface $session): Response
     {
-        $deck = new DeckOfCards();
+        $deck = $session->get("card_deck");
 
-        $session->set("card_deck", $deck);
+        if (!$deck) {
+            $deck = new DeckOfCards();
+            $session->set("card_deck", $deck);
+        }
 
         $data = [
             "cards" => $deck->getCards()

@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
+use App\Card\DeckOfCards;
+use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Card\DeckOfCards;
 
 class CardApiController extends AbstractController
 {
@@ -15,11 +16,41 @@ class CardApiController extends AbstractController
     public function index(): Response
     {
         $routes = [
-            'GET /api/deck' => 'Här får du en sorterad kortlek.',
-            'POST /api/deck/shuffle' => 'Blandar kortleken och returnerar den.',
-            'POST /api/deck/draw' => 'Drar ett kort från kortleken.',
-            'POST /api/deck/draw/:number' => 'Drar flera kort från kortleken.',
-            'GET /api/game' => 'Här får du den aktuella ställningen i spelet.',
+            [
+                'method' => 'GET',
+                'path' => '/api/deck',
+                'description' => 'Här får du en sorterad kortlek.',
+            ],
+            [
+                'method' => 'POST',
+                'path' => '/api/deck/shuffle',
+                'description' => 'Blandar kortleken och returnerar den.',
+            ],
+            [
+                'method' => 'GET',
+                'path' => '/api/deck/draw',
+                'description' => 'Drar ett kort från kortleken.',
+            ],
+            [
+                'method' => 'POST',
+                'path' => '/api/deck/draw/:number',
+                'description' => 'Drar flera kort från kortleken.',
+            ],
+            [
+                'method' => 'GET',
+                'path' => '/api/game',
+                'description' => 'Här får du den aktuella ställningen i spelet.',
+            ],
+            [
+                'method' => 'GET',
+                'path' => '/api/library/books',
+                'description' => 'Visar alla böcker från biblioteket.',
+            ],
+            [
+                'method' => 'GET',
+                'path' => '/api/library/book/{isbn}',
+                'description' => 'Visar en bok genom ISBN (testa t.ex. /api/library/book/123456789).',
+            ],
         ];
 
         return $this->render('card/api.html.twig', ['routes' => $routes]);
@@ -53,6 +84,24 @@ class CardApiController extends AbstractController
 
     #[Route("/api/deck/draw", name: "api_deck_draw", methods: ["POST"])]
     public function apiDraw(SessionInterface $session): JsonResponse
+    {
+        $deck = $session->get("card_deck");
+
+        if (!$deck) {
+            $deck = new DeckOfCards();
+        }
+
+        $card = $deck->drawCard();
+        $session->set("card_deck", $deck);
+
+        return $this->json([
+            "drawn" => (string) $card,
+            "remaining" => count($deck->getCards())
+        ]);
+    }
+
+    #[Route("/api/deck/draw", name: "api_deck_draw_get", methods: ["GET"])]
+    public function apiDrawGet(SessionInterface $session): JsonResponse
     {
         $deck = $session->get("card_deck");
 
@@ -138,5 +187,37 @@ class CardApiController extends AbstractController
         }
 
         return $this->json($response);
+    }
+
+    #[Route("/api/library/books", name: "api_library_books", methods: ["GET"])]
+    public function apiLibraryBooks(
+        BookRepository $bookRepository
+    ): JsonResponse {
+        $books = $bookRepository->findAll();
+        $response = $this->json($books);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+
+    #[Route("/api/library/book/{isbn}", name: "api_library_book", methods: ["GET"])]
+    public function apiLibraryBook(
+        string $isbn,
+        BookRepository $bookRepository
+    ): JsonResponse {
+        $book = $bookRepository->findOneBy(['isbn' => $isbn]);
+
+        if (!$book) {
+            return $this->json([
+                "error" => "Det finns tyvärr ingen bok med ISBN $isbn"
+            ], 404);
+        }
+
+        $response = $this->json($book);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
 }
