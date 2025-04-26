@@ -100,7 +100,8 @@
             "@csfix:dry"
         ],
         "phpdoc": "tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml",
-        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit"
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
+        "phpmetrics": "tools/phpmetrics/vendor/bin/phpmetrics --config=tools/phpmetrics/phpmetrics.json"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -116,7 +117,7 @@
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",
         "symfony/debug-bundle": "7.2.*",
-        "symfony/maker-bundle": "^1.62.1",
+        "symfony/maker-bundle": "^1.62",
         "symfony/phpunit-bridge": "^7.2",
         "symfony/stopwatch": "7.2.*",
         "symfony/web-profiler-bundle": "7.2.*"

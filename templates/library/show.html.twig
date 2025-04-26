@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Biblioteket{% endblock %}
+
+{% block body %}
+<h1>Här är alla böcker vi har i biblioteket</h1>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titel</th>
+            <th>ISBN</th>
+            <th>Författare</th>
+            <th>Bild</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.getId() }}</td>
+                <td>
+                    <a href="{{ path('library_show_one', { id: book.getId() }) }}">
+                        {{ book.getTitle() }}
+                    </a>
+                </td>
+                <td>{{ book.getIsbn() }}</td>
+                <td>{{ book.getAuthor() }}</td>
+                <td>
+                    <img src="{{ book.getImage() }}" alt="Bild på boken" style="max-height: 150px;">
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Nämen, det är helt tomt på böcker!</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p><a href="{{ path('library') }}">Tillbaka till startsidan</a></p>
+{% endblock %}

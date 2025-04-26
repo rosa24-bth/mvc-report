@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.getTitle() }}{% endblock %}
+
+{% block body %}
+<h1>{{ book.getTitle() }}</h1>
+
+<ul>
+    <li><strong>ISBN:</strong> {{ book.getIsbn() }}</li>
+    <li><strong>Författare:</strong> {{ book.getAuthor() }}</li>
+    <li><strong>Bild:</strong><br>
+        <img src="{{ book.getImage() }}" alt="Bild på boken" style="max-height: 150px;">
+    </li>
+</ul>
+
+<p><a href="{{ path('library_edit', { id: book.getId() }) }}"><button>Redigera bokens detaljer</button></a></p>
+
+<p>
+    <form action="{{ path('library_delete', { id: book.getId() }) }}" method="post" onsubmit="return confirm('Är du säker på att du vill radera boken?');">
+        <button type="submit">Radera boken</button>
+    </form>
+</p>
+
+<p><a href="{{ path('library_show_all') }}">Tillbaka till översikten</a></p>
+{% endblock %}

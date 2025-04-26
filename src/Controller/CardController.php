@@ -22,11 +22,12 @@ class CardController extends AbstractController
         $sessionData = $session->all();
 
         $deck = $session->get("card_deck");
+        $cards = [];
+
         if ($deck) {
             $cards = $deck->getCards();
-        } else {
-            $cards = [];
         }
+
 
         $data = [
             'session' => $sessionData,
