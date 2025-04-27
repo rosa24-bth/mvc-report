@@ -5,11 +5,16 @@
 {% block body %}
 <h1>API-översikt</h1>
 
+{% set baseUrl = '' %}
+{% if app.request.server.get('SERVER_NAME') starts with 'www.student.bth.se' %}
+    {% set baseUrl = '/~rosa24/dbwebb-kurser/mvc/me/report/public' %}
+{% endif %}
+
 <ul>
     {% for route in routes %}
         <li>
             <strong>{{ route.method }}</strong>
-            <a href="{{ route.path }}" target="_blank">{{ route.path }}</a>:
+            <a href="{{ baseUrl }}{{ route.path }}" target="_blank">{{ route.path }}</a>:
             {{ route.description }}
         </li>
     {% endfor %}
