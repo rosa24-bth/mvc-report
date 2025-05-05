@@ -155,22 +155,10 @@ class CardApiController extends AbstractController
             ]);
         }
 
-        // Get player hand.
-        $playerHand = $game->getPlayerHand()->getCards();
-        $playerCards = [];
-        foreach ($playerHand as $card) {
-            $playerCards[] = (string) $card;
-        }
-        $playerScore = $game->getPlayerScore();
-
         $response = [
-            "player" => [
-                "cards" => $playerCards,
-                "score" => $playerScore
-            ]
+            "player" => $this->buildPlayerResponse($game)
         ];
 
-        // If game is over then show bank aswell.
         if ($bank && $result) {
             $bankHand = $bank->getHand()->getCards();
             $bankCards = [];
@@ -187,6 +175,21 @@ class CardApiController extends AbstractController
         }
 
         return $this->json($response);
+    }
+
+    private function buildPlayerResponse($game): array
+    {
+        $playerHand = $game->getPlayerHand()->getCards();
+        $playerCards = [];
+
+        foreach ($playerHand as $card) {
+            $playerCards[] = (string) $card;
+        }
+
+        return [
+            "cards" => $playerCards,
+            "score" => $game->getPlayerScore()
+        ];
     }
 
     #[Route("/api/library/books", name: "api_library_books", methods: ["GET"])]
