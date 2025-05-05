@@ -42,3 +42,11 @@ symfony server:start
 ```
 
 Öppna sen https://127.0.0.1:8000 i din webbläsare.
+
+### Badges från Scrutinizer
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/?branch=main)
+
+[![Code Coverage](https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/?branch=main)
+
+[![Build Status](https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/badges/build.png?b=main)](https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/build-status/main)

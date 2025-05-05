@@ -101,6 +101,12 @@ final class LibraryController extends AbstractController
     ): Response {
         $book = $bookRepository->find($id);
 
+        if (!$book) {
+            throw $this->createNotFoundException(
+                "Ajdå, vi hittade ingen bok med id: $id"
+            );
+        }
+
         $entityManager = $doctrine->getManager();
         $entityManager->remove($book);
         $entityManager->flush();

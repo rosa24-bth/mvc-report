@@ -3,10 +3,210 @@
 {% block title %}Kodkvalitet och Clean Code{% endblock %}
 
 {% block body %}
-    <h1>Kodkvalitet och Clean Code</h1>
+
+<h1>Kodkvalitet och Clean Code</h1>
+
+<h2>Introduktion</h2>
+    <p>
+        När man pratar om kodkvalitet så kan det först kännas enkelt att förstå vad som menas. Det är lätt att
+        tänka att det är svartvitt, där ens kod då antingen har god kvalitet eller dålig kvalitet. Även om det
+        absolut är så att det finns kod som har sämre och bättre kvalitet så finns det också många nyanser där
+        emellan. Ett bra sätt att närma sig ämnet är genom de så kallade 6 C:na, som alla
+        pekar på olika delar av vad som gör kod lätt att förstå, underhålla och vidareutveckla.
+    </p>
+
+    <ul>
+        <li>
+            <strong>Codestyle:</strong> Handlar om att koden följer en enhetlig stil, till exempel hur man
+            namnger saker, indenterar eller kommenterar. Det påverkar läsbarheten direkt.
+        </li>
+        <li>
+            <strong>Coverage:</strong> Syftar på hur stor del av koden som täcks av enhetstester. Ju mer som
+            testas, desto tryggare kan man vara vid ändringar.
+        </li>
+        <li>
+            <strong>Complexity:</strong> Gäller hur invecklad koden är. Många if-satser, loopar eller
+            beroenden kan göra den svår att förstå och buggar kan lättare smyga sig in.
+        </li>
+        <li>
+            <strong>Cohesion:</strong> Det här handlar om hur väl en klass eller en hel modul faktiskt håller
+            ihop på ett logiskt sätt. En stark cohesion skapar en bra struktur.
+        </li>
+        <li>
+            <strong>Coupling:</strong> Handlar om hur beroende olika delar av koden är av varandra. Ju
+            mindre beroende, desto lättare att ändra utan att allt annat rasar.
+        </li>
+        <li>
+            <strong>CRAP:</strong> Ett mått som blandar testtäckning och komplexitet. Ju högre CRAP-värde,
+            desto större risk att koden är svår att testa och förstå.
+        </li>
+    </ul>
+
+<h3>Exempel från min kod</h3>
+    <p>
+    Ett exempel på komplexitet syns i min klass <code>CardApiController</code> som har ett
+    Intelligent Content-värde på 173.55. Det är högt jämfört
+    med övriga klasser, vilket antyder att den innehåller relativt mycket logik.
+    Här skulle en förhastad slutsats vara att det här är innebär att jag borde bryta ut delar
+    av logiken i det här fallet. Men när man tittar närmre på själva filen så ser man snabbt
+    att det är logiskt att den innehåller just mycket logik. Den är trots allt väldigt cohesive,
+    eftersom den i sig sköter alla api-routes. Hade samtliga routes för min sida varit inbakat
+    i samma modul så skulle det däremot finnas fog för att bryta ut delar. Här var alltså ett
+    intressant exempel där analysverktygen ger stöd och tips, men jag som programmerare "styr
+    kod-skutan".
+    </p>
 
     <p>
-        Här dokumenterar jag min analys av kodkvaliteten i projektet.
+    Ett annat exempel är klassen <code>Card</code> som har ett väldigt lågt Volume-värde
+    (endast 54), vilket tyder på att den är fokuserad och enkel, alltså också det ett tecken på
+    god cohesion och complexity.
     </p>
+
+<h2>Phpmetrics</h2>
+
+<p>
+    Phpmetrics genererade flera mätvärden för mitt projekt som hjälpte mig att förstå var
+    min kod kan förbättras. Här är tre exempel med justeringspotential.
+</p>
+
+<h3>1. CardApiController – Hög komplexitet och inga tester</h3>
+<p>
+    Klassen <code>CardApiController</code> har ett cyclomatic complexity-värde på 17 och ett
+    relativt system complexity-värde på 289.62. Den flaggas dessutom som "probably bugged".
+    Enligt verktyget saknar den testtäckning, vilket är korrekt. Anledningen är att den hanterar
+    många olika endpoints för API:t, med logik för både kortlekar, dragning, shuffle och till och
+    med biblioteket. Även om strukturen är rimlig utifrån ansvarsfördelningen, kan det vara värt att
+    fundera på att dela upp funktionaliteten i flera controllers och skriva enklare tester som täcker
+    de vanligaste flödena.
+</p>
+
+<h3>2. ProductController – Många metoder och blandat ansvar</h3>
+<p>
+    Klassen <code>ProductController</code> innehåller nio publika metoder, något som gör att
+    Phpmetrics klassar den som ett så kallat "god object". Det innebär att klassen har ett
+    brett ansvar, vilket stämmer i det här fallet. Den hanterar både JSON-svar, rendering av
+    mallar och kommunikation med databasen. För att minska komplexiteten skulle man kunna dela
+    upp den i två delar: en controller för API-svar och en annan för vyer. Det skulle både öka
+    läsbarheten och minska risken för framtida problem.
+</p>
+
+<h3>3. DiceGameController – Tydlig struktur men något hög komplexitet</h3>
+<p>
+    Klassen <code>DiceGameController</code> har ett complexity-värde på 16 och ett relativt
+    system complexity-värde på 121.81. Den var inte flaggad som ett allvarligt problem, men
+    stack ändå ut som en av de mer komplexa. Det är logiskt med tanke på att klassen hanterar
+    flera olika scenarier, som att spara poäng, kasta tärningar, hantera session och
+    visa resultat. Även här skulle vissa delar kunna brytas ut i hjälpklasser eller tjänster,
+    men strukturen är ändå relativt tydlig.
+</p>
+
+<p>
+    Sammanfattningsvis pekar Phpmetrics ut ett par centrala klasser som antingen har hög
+    komplexitet, många beroenden eller blandat ansvar. Här har jag ett ganska fint underlag för
+    som kan ge mig möjliga uppslag till förbättringsåtgärder
+</p>
+
+<img src="{{ asset('images/phpmetrics.png') }}" alt="phpmetrics" style="max-width: 100%;">
+
+<h2>Scrutinizer</h2>
+
+<p>
+    Scrutinizer gav ett högt betyg till mitt projekt, hela 9.93 av 10 i quality score.
+    Det är ett bra kvitto på att grundläggande strukturer och konventioner är på plats.
+    Verktyget lyfte dock fram några förbättringsområden, vilket jag har valt att titta närmare på här.
+</p>
+
+<h3>1. apiGame i CardApiController – Komplex metod utan tester</h3>
+<p>
+    Metoden <code>apiGame()</code> i <code>CardApiController</code> fick ett betyg på B.
+    Den innehåller 45 rader totalt och har sex olika villkorsgrenar.
+    Det gör att metoden har en ganska hög komplexitet.
+    Dessutom saknas enhetstester för den.
+    Här skulle det vara rimligt att börja med att bryta ut vissa delar till privata metoder.
+    Därefter går det att skriva enklare tester som verifierar svaren för olika sessionstillstånd.
+</p>
+
+<h3>2. deleteBook i LibraryController – Saknar kontroll för null</h3>
+<p>
+    I <code>deleteBook()</code> i <code>LibraryController</code> varnar Scrutinizer för att det saknas en kontroll
+    om boken verkligen hittats innan <code>remove()</code> anropas.
+    Det gör att metoden kan krascha om ett ogiltigt id skickas in.
+    I praktiken är det lätt att lägga till ett enkelt if-test som kastar ett undantag eller gör en redirect
+    om boken inte hittas.
+    Det är en liten sak som kan förhindra onödiga fel i produktion.
+</p>
+
+<h3>3. Låg kodtäckning</h3>
+<p>
+    En annan punkt som stack ut i rapporten var den låga kodtäckningen.
+    Scrutinizer visade att mappen <code>Controller/</code> hade noll procent testtäckning.
+    Det stämmer eftersom jag valt att lägga testfokus på logik och modeller.
+    Men vissa kontroller skulle ju också kunna täckas av tester så klart.
+    Det skulle både förbättra täckningsgraden och ge ett extra skydd mot framtida fel.
+</p>
+
+<p>
+    <a href="https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/?branch=main">
+        <img src="https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/badges/quality-score.png?b=main" alt="Scrutinizer Code Quality">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/?branch=main">
+        <img src="https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/badges/coverage.png?b=main" alt="Code Coverage">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/build-status/main">
+        <img src="https://scrutinizer-ci.com/g/rosa24-bth/mvc-report/badges/build.png?b=main" alt="Build Status">
+    </a>
+</p>
+
+<img src="{{ asset('images/scrutinizer.png') }}" alt="scrutinizer" style="max-width: 100%;">
+
+<h2>Sammanfattning</h2>
+
+<p>
+    Flera av de punkter som lyfts i både Phpmetrics och Scrutinizer går att koppla till 6C.
+    Till exempel visar den låga testtäckningen på bristfällig coverage, och den höga komplexiteten
+    i CardApiController påverkar både complexity och testbarhet.
+    ProductController visar tecken på låg cohesion och hög coupling.
+    Jag valde också att titta extra på kodens volym och duplicering i Phpmetrics,
+    eftersom det ger en bredare bild av hur lättunderhållen koden är.
+</p>
+
+<h2>Förbättringsförslag</h2>
+
+<p>
+    Efter att ha gått igenom både Phpmetrics och Scrutinizer så valde jag ut tre saker i min kod
+    som jag ville förbättra. Jag valde sådant som kändes tydligt kopplat till mätvärdena
+    och som jag tror och hoppas kan innebära en rimlig ombyggnationsinsats, samtidigt som det
+    kan ge en relativt stor positiv effekt; lågt hängande, men ändå saftiga frukter, helt enkelt.
+</p>
+
+<h3>1. Kontroll i deleteBook</h3>
+<p>
+    Scrutinizer visade ett problem i metoden <code>deleteBook()</code> i <code>LibraryController</code>.
+    Det saknades en kontroll om boken faktiskt hittats innan <code>remove()</code> anropades.
+    Jag lade till ett enkelt <code>if</code>-test som kastar ett undantag om boken är <code>null</code>.
+    Det här är en liten fix, men det löste ett konkret problemområde och bör ge en direkt positiv
+    effekt på både quality score och kodens säkerhet.
+</p>
+
+<h3>2. Bryta ut metod från apiGame</h3>
+<p>
+    Metoden <code>apiGame()</code> i <code>CardApiController</code> var både lång och innehöll många
+    grenar. Jag valde att bryta ut den del som hanterar spelaren till en egen privat metod.
+    Det gör metoden lättare att läsa och minskar komplexiteten, vilket borde förbättra
+    cyclomatic complexity och samtidigt göra den enklare att testa.
+</p>
+
+<h3>3. Test för api/deck</h3>
+<p>
+    Kodtäckningen i mappen <code>Controller/</code> var noll, vilket Scrutinizer så klart uppmärksammade.
+    Jag valde att skriva ett enkelt test som anropar <code>/api/deck</code> och kontrollerar att svaret
+    innehåller rätt antal kort. Det här kommer förmodligen inte påverka quality score så mycket,
+    men det förbättrar coverage och är en första byggsten till att potentiellt kunna testa fler controllers framöver.
+</p>
+
+<p>
+    Jag kommer nu att köra om analyserna och jämföra de gamla och nya mätvärdena i både Phpmetrics
+    och Scrutinizer. Det ska bli intressant att se om verktygen märker av förbättringarna som jag tror!
+</p>
 
 {% endblock %}
