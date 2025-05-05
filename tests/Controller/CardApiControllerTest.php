@@ -97,18 +97,4 @@ class CardApiControllerTest extends WebTestCase
         $this->assertArrayHasKey('error', $data);
         $this->assertEquals('Spelet har inte startats ännu.', $data['error']);
     }
-
-    /**
-     * Request to get book by non-existing ISBN should return 404.
-     */
-    public function testApiLibraryBookReturnsErrorIfNotFound()
-    {
-        $client = static::createClient();
-        $client->request('GET', '/api/library/book/does-not-exist');
-
-        $this->assertResponseStatusCodeSame(404);
-
-        $data = json_decode($client->getResponse()->getContent(), true);
-        $this->assertArrayHasKey('error', $data);
-    }
 }

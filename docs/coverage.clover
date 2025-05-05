@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1746453416">
-  <project timestamp="1746453416">
+<coverage generated="1746454372">
+  <project timestamp="1746454372">
     <file name="/Users/robin/dbwebb-kurser/mvc/me/report/src/Card/Card.php">
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="9" coveredelements="9"/>
@@ -40,18 +40,18 @@
       <line num="29" type="stmt" count="7"/>
       <line num="30" type="stmt" count="7"/>
       <line num="32" type="stmt" count="7"/>
-      <line num="33" type="stmt" count="1"/>
-      <line num="34" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="2"/>
       <line num="37" type="stmt" count="6"/>
       <line num="38" type="stmt" count="1"/>
       <line num="39" type="stmt" count="1"/>
       <line num="42" type="stmt" count="5"/>
-      <line num="43" type="stmt" count="2"/>
-      <line num="44" type="stmt" count="2"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
       <line num="47" type="stmt" count="5"/>
-      <line num="48" type="stmt" count="2"/>
-      <line num="49" type="stmt" count="2"/>
-      <line num="50" type="stmt" count="2"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
       <line num="53" type="stmt" count="5"/>
       <line num="57" type="stmt" count="7"/>
       <line num="58" type="stmt" count="1"/>
@@ -91,7 +91,7 @@
     </file>
     <file name="/Users/robin/dbwebb-kurser/mvc/me/report/src/Controller/CardApiController.php">
       <class name="App\Controller\CardApiController" namespace="global">
-        <metrics complexity="20" methods="10" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="126" coveredstatements="44" elements="136" coveredelements="46"/>
+        <metrics complexity="20" methods="10" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="126" coveredstatements="39" elements="136" coveredelements="41"/>
       </class>
       <line num="15" type="method" name="index" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="18" type="stmt" count="0"/>
@@ -218,18 +218,18 @@
       <line num="202" type="stmt" count="0"/>
       <line num="203" type="stmt" count="0"/>
       <line num="204" type="stmt" count="0"/>
-      <line num="207" type="method" name="apiLibraryBook" visibility="public" complexity="2" crap="2.50" count="1"/>
-      <line num="212" type="stmt" count="1"/>
-      <line num="214" type="stmt" count="1"/>
-      <line num="215" type="stmt" count="1"/>
-      <line num="216" type="stmt" count="1"/>
-      <line num="217" type="stmt" count="1"/>
+      <line num="207" type="method" name="apiLibraryBook" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="212" type="stmt" count="0"/>
+      <line num="214" type="stmt" count="0"/>
+      <line num="215" type="stmt" count="0"/>
+      <line num="216" type="stmt" count="0"/>
+      <line num="217" type="stmt" count="0"/>
       <line num="220" type="stmt" count="0"/>
       <line num="221" type="stmt" count="0"/>
       <line num="222" type="stmt" count="0"/>
       <line num="223" type="stmt" count="0"/>
       <line num="224" type="stmt" count="0"/>
-      <metrics loc="227" ncloc="227" classes="1" methods="10" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="126" coveredstatements="44" elements="136" coveredelements="46"/>
+      <metrics loc="227" ncloc="227" classes="1" methods="10" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="126" coveredstatements="39" elements="136" coveredelements="41"/>
     </file>
     <file name="/Users/robin/dbwebb-kurser/mvc/me/report/src/Controller/CardController.php">
       <class name="App\Controller\CardController" namespace="global">
@@ -739,11 +739,11 @@
     </file>
     <file name="/Users/robin/dbwebb-kurser/mvc/me/report/src/Repository/BookRepository.php">
       <class name="App\Repository\BookRepository" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
       </class>
-      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="16" type="stmt" count="1"/>
-      <metrics loc="44" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="16" type="stmt" count="0"/>
+      <metrics loc="44" ncloc="18" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
     </file>
     <file name="/Users/robin/dbwebb-kurser/mvc/me/report/src/Repository/ProductRepository.php">
       <class name="App\Repository\ProductRepository" namespace="global">
@@ -821,6 +821,6 @@
       <line num="48" type="stmt" count="1"/>
       <metrics loc="51" ncloc="51" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="17" coveredelements="17"/>
     </file>
-    <metrics files="25" loc="1759" ncloc="1637" classes="24" methods="110" coveredmethods="38" conditionals="0" coveredconditionals="0" statements="560" coveredstatements="134" elements="670" coveredelements="172"/>
+    <metrics files="25" loc="1759" ncloc="1637" classes="24" methods="110" coveredmethods="37" conditionals="0" coveredconditionals="0" statements="560" coveredstatements="128" elements="670" coveredelements="165"/>
   </project>
 </coverage>
