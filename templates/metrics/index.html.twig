@@ -159,7 +159,7 @@
 
 <img src="{{ asset('images/scrutinizer.png') }}" alt="scrutinizer" style="max-width: 100%;">
 
-<h2>Sammanfattning</h2>
+<h3>Sammanfattning</h3>
 
 <p>
     Flera av de punkter som lyfts i både Phpmetrics och Scrutinizer går att koppla till 6C.
@@ -196,17 +196,98 @@
     cyclomatic complexity och samtidigt göra den enklare att testa.
 </p>
 
-<h3>3. Test för api/deck</h3>
+<h3>3. Tester för controllers</h3>
 <p>
     Kodtäckningen i mappen <code>Controller/</code> var noll, vilket Scrutinizer så klart uppmärksammade.
-    Jag valde att skriva ett enkelt test som anropar <code>/api/deck</code> och kontrollerar att svaret
-    innehåller rätt antal kort. Det här kommer förmodligen inte påverka quality score så mycket,
+    Jag valde därför att en del tester för <code>CardApiController</code>. Det här kommer förmodligen inte
+    påverka quality score så mycket,
     men det förbättrar coverage och är en första byggsten till att potentiellt kunna testa fler controllers framöver.
 </p>
 
 <p>
     Jag kommer nu att köra om analyserna och jämföra de gamla och nya mätvärdena i både Phpmetrics
     och Scrutinizer. Det ska bli intressant att se om verktygen märker av förbättringarna som jag tror!
+</p>
+
+<h2>Analys före och efter förbättringar</h2>
+
+<p>
+    Efter att ha genomfört mina tre utvalda förbättringar: null-kontroll i <code>deleteBook()</code>,
+    utbrytning av en privat metod från <code>apiGame()</code> samt utökad testning av <code>CardApiController</code>, så körde jag om analyserna i både PhpMetrics och Scrutinizer.
+    Resultatet blev blandat: Scrutinizer reagerade tydligt positivt på ändringarna, medan PhpMetrics visade en viss försämring i sina värden.
+</p>
+
+
+<h3>Scrutinizer</h3>
+<ul>
+    <li><strong>Quality Score:</strong> Höjdes från 9.93 till 9.96, vilket visar att de genomförda ändringarna uppfattades som kvalitetsförbättringar av verktyget.</li>
+    <li><strong>Code Coverage:</strong> Ökade från 19% till 25 % tack vare de nya testerna för <code>CardApiController</code>.</li>
+    <li><strong>apiGame():</strong> Metoden förbättrades från betyg B till A efter att jag brutit ut en del av logiken <code>buildPlayerResponse()</code>.</li>
+    <li><strong>deleteBook():</strong> Det tidigare rapporterade felet om potentiellt null-värde är nu markerat som “Fixed”.</li>
+</ul>
+
+<img src="{{ asset('images/scrutinizer2.png') }}" alt="phpmetrics2" style="max-width: 100%;">
+
+<h3>Phpmetrics</h3>
+<p>
+    Trots förbättrad struktur och testning visade PhpMetrics en liten försämring i vissa globala mätvärden efter ändringarna.
+    Detta visar att även om koden har blivit mer testbar och bättre strukturerad, så har förändringarna också påverkat
+    komplexitetsmåtten negativt. Jag har ju lagt till en metod (<code>buildPlayerResponse()</code>), vilket höjer totalsumman.
+    Det här är ett intressant exempel som belyser att man inte ska stirra sig blind på siffror och mätvärden i olika testverktyg.
+    Det är viktigt att förstå vad som ligger bakom de olika värdena och vad de innebär, för att då bättre kunna prioritera
+    vilka som ska attackeras, och hur man gör det. Att Phpmetrics tycker att komplexiteten höjts är jag helt OK med. Den har blivit
+    högre, men av en god anledning som jag är medveten om och införstådd med. Med det sagt så finns det så klart andra delar av
+    koden jag kommer kunna putsa på för att förbättra kodkvaliteten samtidigt som värdena i Phpmetrics också blir bättre.
+</p>
+
+<img src="{{ asset('images/phpmetrics2.png') }}" alt="phpmetrics2" style="max-width: 100%;">
+
+<h3>Sammanfattning</h3>
+
+<p>
+    Det är tydligt att de förbättringar jag valde har haft mätbar effekt, både vad gäller kodkvalitet
+    och testtäckning. Samtidigt bekräftar verktygen att även små förändringar kan ha stor påverkan på både säkerhet och underhållbarhet.
+</p>
+
+<h2>Diskussion</h2>
+
+<p>
+    Det har varit intressant att få arbeta vidare och analysera min kod kopplat till kodkvalitet.
+    Jag uppskattar att ha fått testa att först analysera koden, identifiera förbättringsområden och sen genomföra
+    faktiska justeringar med avstamp där. Att låta verktyg som
+    Phpmetrics och Scrutinizer vara en del av processen har gett mig nya perspektiv på vad som kan påverka
+    kvalitetsmått, och hur dessa verktyg ser på kodstruktur jämfört med hur jag själv uppfattar den.
+</p>
+
+<p>
+    Jag tycker det här känns som ett vettigt sätt att jobba med sin kodkvalitet. Det blir ett mer
+    iterativt och reflekterande arbetssätt där jag som utvecklare inte bara “löser uppgiften”, utan också
+    försöker göra det på ett sätt som blir hållbart, tydligt och lätt att testa. Det tar lite mer tid, men
+    det gör också att jag lär mig mer om min egen kod och blir mer trygg i att den håller över tid.
+</p>
+
+<p>
+    En fördel är att det blir lättare att se mönster och hitta kod som kan brytas ut eller förbättras. Jag
+    tycker också det känns motiverande att se hur mätvärden påverkas när jag gör ändringar, även om vissa
+    försämringar kan kännas lite orättvisande. En potentiell nackdel är att man lätt kan lägga för mycket fokus
+    på att tillfredställa verktygen, istället för att lita på sitt eget omdöme. Därför tror jag det är viktigt att
+    verktygen ses som just stöd och inte som facit eller den enda absoluta sanningen till kvalitativ kod. Jag kan
+    också se en risk med att det går att faktiskt lägga för mycket tid på detta, i ett projekt. Det krävs säkert
+    mer erfarenhet med verktygen för att bli bra på att prioritera rätt, så man inte lägger mycket tid på något som
+    faktiskt får ett ganska litet nettovärde.
+</p>
+
+<p>
+    Genom mvc-kursen har vi ofta pratat om att tänka på ansvarsfördelning mellan klasser redan tidigt i
+    planeringen, till exempel med flödesscheman och pseudokod. Det märks att det hänger ihop med att
+    senare analysera kodens struktur. Men det är inte bara verktyg som Scrutinizer eller
+    Phpmetrics som kan användas för att jobba mot clean code. Även saker som code reviewing, att öppet diskutera
+    kod med andra eller att helt enkelt lära sig mer om principerna för clean code tror jag kan vara bra sätt att
+    öka sin kodmedvetenhet och kvalitet.
+    Det jag gillar mest med det här sättet att jobba är kombinationen av tydliga mätvärden
+    och egen reflektion. Man får en chans att tänka efter; är det här verkligen ett problem eller bara
+    något som verktyget tycker? Jag känner att jag blivit mer medveten och samtidigt tryggare i mina
+    beslut kring vad jag tycker är god kod. Det här är absolut värdefulla lärdomar jag kommer ta med mig framåt!
 </p>
 
 {% endblock %}
