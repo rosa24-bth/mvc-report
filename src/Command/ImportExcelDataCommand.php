@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\LowEconomicStandard;
 use App\Entity\LongtermEconomicSupport;
+use App\Service\FileLoader; // 🆕 Import för nya tjänsten
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -29,15 +30,19 @@ class ImportExcelDataCommand extends Command
 {
     private EntityManagerInterface $entityManager;
 
+    private FileLoader $fileLoader;
+
     /**
      * Constructor.
      *
      * @param EntityManagerInterface $entityManager Injected Doctrine entity manager.
+     * @param FileLoader $fileLoader Service to open files instead of directly using fopne().
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, FileLoader $fileLoader)
     {
         parent::__construct();
         $this->entityManager = $entityManager;
+        $this->fileLoader = $fileLoader;
     }
 
     /**
@@ -69,8 +74,8 @@ class ImportExcelDataCommand extends Command
                 continue;
             }
 
-            // Try to open file for raeding.
-            $handle = fopen($filePath, 'r');
+            // Use fileLoader() to open.
+            $handle = $this->fileLoader->open($filePath);
             if (!$handle) {
                 $output->writeln("Could not open file: $filename");
                 continue;

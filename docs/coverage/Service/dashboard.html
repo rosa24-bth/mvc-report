@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /Users/robin/dbwebb-kurser/mvc/me/report/src/Card</title>
+  <title>Dashboard for /Users/robin/dbwebb-kurser/mvc/me/report/src/Service</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../_css/bootstrap.min.css?v=9.2.32" rel="stylesheet" type="text/css">
   <link href="../_css/nv.d3.min.css?v=9.2.32" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../index.html">/Users/robin/dbwebb-kurser/mvc/me/report/src</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Card</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Service</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -155,7 +155,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,4], "Class Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,1], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -173,7 +173,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,15], "Method Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,1], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -223,7 +223,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,4,"<a href=\"Card.php.html#10\">App\\Card\\Card<\/a>"],[100,1,"<a href=\"CardGraphic.php.html#5\">App\\Card\\CardGraphic<\/a>"],[100,11,"<a href=\"CardHand.php.html#5\">App\\Card\\CardHand<\/a>"],[100,11,"<a href=\"DeckOfCards.php.html#5\">App\\Card\\DeckOfCards<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"FileLoader.php.html#5\">App\\Service\\FileLoader<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -247,7 +247,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"Card.php.html#15\">App\\Card\\Card::__construct<\/a>"],[100,1,"<a href=\"Card.php.html#21\">App\\Card\\Card::getValue<\/a>"],[100,1,"<a href=\"Card.php.html#26\">App\\Card\\Card::getSuit<\/a>"],[100,1,"<a href=\"Card.php.html#31\">App\\Card\\Card::getAsString<\/a>"],[100,1,"<a href=\"CardGraphic.php.html#7\">App\\Card\\CardGraphic::__toString<\/a>"],[100,1,"<a href=\"CardHand.php.html#9\">App\\Card\\CardHand::addCard<\/a>"],[100,1,"<a href=\"CardHand.php.html#14\">App\\Card\\CardHand::getCards<\/a>"],[100,1,"<a href=\"CardHand.php.html#19\">App\\Card\\CardHand::clear<\/a>"],[100,8,"<a href=\"CardHand.php.html#24\">App\\Card\\CardHand::getTwentyOneGameValue<\/a>"],[100,3,"<a href=\"DeckOfCards.php.html#9\">App\\Card\\DeckOfCards::__construct<\/a>"],[100,1,"<a href=\"DeckOfCards.php.html#21\">App\\Card\\DeckOfCards::getCards<\/a>"],[100,2,"<a href=\"DeckOfCards.php.html#26\">App\\Card\\DeckOfCards::getCardsAsString<\/a>"],[100,1,"<a href=\"DeckOfCards.php.html#37\">App\\Card\\DeckOfCards::shuffle<\/a>"],[100,1,"<a href=\"DeckOfCards.php.html#42\">App\\Card\\DeckOfCards::drawCard<\/a>"],[100,3,"<a href=\"DeckOfCards.php.html#47\">App\\Card\\DeckOfCards::drawCards<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"FileLoader.php.html#13\">App\\Service\\FileLoader::open<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);
