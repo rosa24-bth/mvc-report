@@ -12,6 +12,6 @@ when@test:
     framework:
         test: true
         assets:
-            enabled: false
+            packages: {}
         session:
             storage_factory_id: session.storage.factory.mock_file
