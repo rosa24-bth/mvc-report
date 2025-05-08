@@ -5,17 +5,17 @@
         <title>{% block title %}Projekt{% endblock %}</title>
         <link rel="icon" href="{{ asset('img/glider.svg') }}">
 
-        {% block stylesheets %}
-            {% if app.environment != 'test' %}
-                {{ encore_entry_link_tags('project') }}
-            {% endif %}
-        {% endblock %}
+    {% block stylesheets %}
+        {% if app_env != 'test' %}
+            {{ encore_entry_link_tags('project') }}
+        {% endif %}
+    {% endblock %}
 
-        {% block javascripts %}
-            {% if app.environment != 'test' %}
-                {{ encore_entry_script_tags('project') }}
-            {% endif %}
-        {% endblock %}
+    {% block javascripts %}
+        {% if app_env != 'test' %}
+            {{ encore_entry_script_tags('project') }}
+        {% endif %}
+    {% endblock %}
     </head>
     <body>
         <header class="site-header">
