@@ -1,0 +1,106 @@
+{% extends 'project/base_project.html.twig' %}
+
+{% block title %}Grafer: Ekonomiska indikatorer{% endblock %}
+
+{% block body %}
+<section class="wrapper">
+    <h2 id="low-chart">Grafer: Låg ekonomisk standard</h2>
+
+    <form method="get" action="{{ path('sustainability_graphs') ~ '#low-chart' }}">
+        <label for="group1">Välj grupp:</label>
+        <select name="group1" id="group1" onchange="this.form.submit()">
+            {% for name in low_groups %}
+                <option value="{{ name }}" {% if selected_group1 == name %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="group2" value="{{ selected_group2 }}">
+    </form>
+
+    <canvas id="lowStandardChart" height="200"></canvas>
+
+    <h2 id="long-chart" style="margin-top: 3em;">Grafer: Långvarigt ekonomiskt bistånd</h2>
+
+    <form method="get" action="{{ path('sustainability_graphs') ~ '#long-chart' }}">
+        <label for="group2">Välj grupp:</label>
+        <select name="group2" id="group2" onchange="this.form.submit()">
+            {% for name in long_groups %}
+                <option value="{{ name }}" {% if selected_group2 == name %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="group1" value="{{ selected_group1 }}">
+    </form>
+
+    <canvas id="longSupportChart" height="200" style="margin-top: 2em;"></canvas>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx1 = document.getElementById('lowStandardChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: {{ chart_labels|json_encode|raw }},
+            datasets: [{
+                label: 'Låg ekonomisk standard – {{ selected_group1 }}',
+                data: {{ chart_values|json_encode|raw }},
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    suggestedMin: {{ low_suggested_min }},
+                    suggestedMax: {{ low_suggested_max }},
+                    title: {
+                        display: true,
+                        text: 'Andel (%)'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Andel personer i låg ekonomisk standard'
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('longSupportChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: {{ long_labels|json_encode|raw }},
+            datasets: [{
+                label: 'Långvarigt bistånd – {{ selected_group2 }}',
+                data: {{ long_values|json_encode|raw }},
+                fill: false,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                tension: 0.2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    suggestedMin: {{ long_suggested_min }},
+                    suggestedMax: {{ long_suggested_max }},
+                    title: {
+                        display: true,
+                        text: 'Andel (%)'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Andel personer med långvarigt ekonomiskt bistånd'
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

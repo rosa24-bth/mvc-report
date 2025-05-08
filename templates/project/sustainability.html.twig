@@ -1,0 +1,156 @@
+{% extends 'project/base_project.html.twig' %}
+
+{% block title %}Hållbar utveckling: Ekonomiska indikatorer{% endblock %}
+
+{% block body %}
+<section class="wrapper">
+
+    <h2>Låg ekonomisk standard</h2>
+    <p style="margin-top: 1em;">
+        Vissa grupper sticker verkligen ut när det gäller låg ekonomisk standard. Det tydligaste
+        exemplet är ensamstående med barn, där andelen som lever under fattigdomsgränsen är
+        extremt hög jämfört med befolkningen i stort. Ensamstående kvinnor med barn 0 till 19 år
+        ligger stabilt på runt 38 procent genom hela perioden, medan genomsnittet för samtliga
+        personer ligger på strax under 15 procent<sup>[1]</sup>.
+    </p>
+    <p>
+        I andra änden av skalan finns sammanboende utan barn. Det är en grupp där andelen med låg
+        ekonomisk standard ofta ligger så lågt som 4 till 5 procent. Det visar hur hushållets
+        sammansättning spelar in. Två vuxna med gemensam ekonomi, men utan kostnader för barn,
+        har alltså ofta ett starkt skyddsnät mot ekonomisk utsatthet.
+    </p>
+    <p>
+        Att leva som ensamstående med barn innebär däremot tuffare prioriteringar. Enligt Rädda
+        Barnens rapport från 2023 uppgav nära hälften av dessa föräldrar att de har svårt att
+        köpa näringsrik mat varje dag. Många tvingas också välja bort sådant som fritidsaktiviteter
+        och kläder<sup>[3]</sup>. Sådana begränsningar i vardagen påverkar inte bara barnens
+        nuvarande livsvillkor, utan även deras möjligheter längre fram.
+    </p>
+    <p>
+        Enligt SCB:s statistik från 2023 lever över hälften av alla utrikes födda barn i Sverige
+        i hushåll med låg ekonomisk standard. Detta kan jämföras med cirka 14 procent bland barn
+        födda i Sverige med svenskfödda föräldrar<sup>[2]</sup>. Skillnaden visar hur bakgrund och
+        etablering i Sverige påverkar barns ekonomiska förutsättningar.
+    </p>
+
+    <h3 style="margin-top: 2em;">Tabell:</h3>
+    <table class="pivot-table">
+        <thead>
+            <tr>
+                <th>Grupp</th>
+                {% for year in years %}
+                    <th>{{ year }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for group, values in low_pivot %}
+                <tr>
+                    <td>{{ group }}</td>
+                    {% for year in years %}
+                        <td>{{ values[year] ?? '-' }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 style="margin-top: 3em;">Långvarigt ekonomiskt bistånd</h2>
+    <p style="margin-top: 1em;">
+        Även när det gäller långvarigt ekonomiskt bistånd sticker vissa grupper ut tydligt.
+        Ensamstående kvinnor med barn ligger genomgående högt, ofta mellan 6 och 7 procent, vilket
+        är tre till fyra gånger högre än genomsnittet<sup>[4]</sup>. Det pekar på att
+        det inte handlar om tillfälliga svårigheter, utan om en mer långvarig ekonomisk utsatthet som
+        är svår att ta sig ur.
+    </p>
+    <p>
+        Situationen blir ännu tydligare när man ser att barn till ensamstående kvinnor själva syns i
+        statistiken, ofta med nivåer på 7 till 8 procent<sup>[4]</sup>. Det är en indikation på att barnen
+        inte bara påverkas indirekt av föräldrarnas ekonomi, utan även räknas som mottagare av stöd.
+        Det här kan visa att det är aktuellt för oss att ställa frågor om hur
+        stödsystemen fångar upp barns behov, men också om hur långvarig
+        fattigdom kan få fäste tidigt i livet.
+    </p>
+    <p>
+        Gruppen "ej boende med förälder" ligger också konsekvent högt, med en särskilt tydlig topp år
+        2018<sup>[4]</sup>. Det tyder på att det finns ungdomar och barn i boenden utan stark familjeanknytning
+        som har svårt att klara sig ekonomiskt. Det är en grupp som kanske ofta glöms bort i den bredare
+        debatten om fattigdom, men som här tydligt framstår som en av de mest utsatta.
+    </p>
+
+    <h3 style="margin-top: 2em;">Tabell:</h3>
+    <table class="pivot-table">
+        <thead>
+            <tr>
+                <th>Grupp</th>
+                {% for year in years %}
+                    <th>{{ year }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for group, values in long_pivot %}
+                <tr>
+                    <td>{{ group }}</td>
+                    {% for year in years %}
+                        <td>{{ values[year] ?? '-' }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <section class="analysis-summary" style="margin-top: 3em;">
+    <h2>Sammanfattning och reflektion</h2>
+    <p>
+        Sammantaget är det tydligt att hushållstyp har en avgörande betydelse för den ekonomiska
+        tryggheten. Grupper som ensamstående kvinnor med barn återkommer som särskilt utsatta, både
+        när det gäller låg ekonomisk standard och när man ser till långvarigt ekonomiskt bistånd.
+        Det tyder på en dubbel utsatthet där inkomstnivån inte räcker till, samtidigt som behovet
+        av stöd blir långvarigt.
+    </p>
+    <p>
+        Den starka överlappningen mellan indikatorerna är också tecken på att fattigdom i många fall inte
+        är ett kortvarigt tillstånd, utan något som riskerar att bli permanent för vissa grupper.
+        Samtidigt ser vi att andra grupper, som sammanboende utan barn, ligger stabilt lågt i båda
+        indikatorerna. Det är alltså på alla sätt större risker och problem för barnfamiljer.
+        Om man funderar över insatser för att förbättra siffrorna (och framförallt situationen för människorna
+        bakom siffrorna så klart) så bör fokus helt klart ligga på de grupperna.
+    </p>
+    <p>
+        En fråga som väcks är var gränsen går; när övergår låg ekonomisk standard till ett
+        långvarigt beroende av bistånd? Det är inte två skilda världar, utan ofta steg i samma
+        process. Och ju längre utsattheten varar, desto större blir risken att barn som växer upp i
+        dessa förhållanden själva fastnar i en liknande situation i vuxen ålder<sup>[3][5]</sup>.
+    </p>
+    </section>
+
+    <section class="references" style="margin-top: 4em;">
+        <h3>Källor</h3>
+        <ol>
+            <li>
+                SCB. Statistikdatabasen – Andel med låg ekonomisk standard efter hushållstyp.
+                <a href="https://www.statistikdatabasen.scb.se/" target="_blank">SCB.se</a>
+            </li>
+            <li>
+                SCB. (2023). Hälften av alla utrikes födda barn lever med låg ekonomisk standard.
+                <a href="https://www.scb.se/hitta-statistik/artiklar/2023/halften-av-alla-utrikes-fodda-barn-lever-med-lag-ekonomisk-standard/" target="_blank">scb.se</a>
+            </li>
+            <li>
+                Rädda Barnen. (2023). Barnfamiljers ekonomiska svårigheter – Sifo-undersökning.
+                <a href="https://www.raddabarnen.se/globalassets/dokument/rad--kunskap/handbocker/barnfattigdom/barnfamiljers_ekonomiska_svarigheter_sifo2024.pdf"
+                   target="_blank">raddabarnen.se</a>
+            </li>
+            <li>
+                SCB. (2023). Statistikdatabasen – Långvarigt ekonomiskt bistånd efter hushållstyp.
+                <a href="https://www.statistikdatabasen.scb.se/" target="_blank">SCB.se</a>
+            </li>
+            <li>
+                Socialstyrelsen. (2025). Individ- och familjeomsorg – Lägesrapport 2025.
+                <a href="https://www.socialstyrelsen.se/globalassets/sharepoint-dokument/artikelkatalog/ovrigt/2025-3-9498.pdf"
+                target="_blank">socialstyrelsen.se</a>
+            </li>
+        </ol>
+    </section>
+</section>
+{% endblock %}

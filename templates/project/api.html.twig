@@ -1,0 +1,95 @@
+{% extends 'project/base_project.html.twig' %}
+
+{% block title %}JSON API{% endblock %}
+
+{% block body %}
+<section class="wrapper">
+    <h2>Projektets JSON API</h2>
+
+    <p>
+        Här visas några utvalda JSON-endpoints som hämtar statistik direkt från databasen.
+        Du kan klicka på länkarna nedan för att se rådatan för varje grupp. Alla rader
+        returneras i JSON-format och innehåller bland annat gruppnamn, årtal och värde.
+    </p>
+
+    <h3>Låg ekonomisk standard</h3>
+    <ul>
+        <li>
+            <a href="{{ path('api_low_samtliga') }}" target="_blank">
+                Samtliga personer
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('api_low_ensamstaende_kvinnor_utan_barn') }}" target="_blank">
+                Ensamstående kvinnor utan barn
+            </a>
+        </li>
+    </ul>
+
+    <h3 style="margin-top: 2em;">Långvarigt ekonomiskt bistånd</h3>
+    <ul>
+        <li>
+            <a href="{{ path('api_long_samtliga') }}" target="_blank">
+                Samtliga personer
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('api_long_ej_boende') }}" target="_blank">
+                Ej boende med förälder
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('api_long_barn_ensamstaende') }}" target="_blank">
+                Barn till ensamstående kvinnor
+            </a>
+        </li>
+    </ul>
+
+    <h3>POST-route: Hämta data från valfri grupp i tabellen "låg ekonomisk standard"</h3>
+    <p>Testa att skicka in ett gruppnamn i en POST-request. Här nedan hittar du de grupper som finns att välja på.</p>
+
+    <form id="postForm">
+        <label for="groupInput">Gruppnamn:</label>
+        <input type="text" id="groupInput" name="groupName" placeholder="t.ex. Samtliga personer">
+        <button type="submit">Skicka</button>
+    </form>
+
+    <pre id="postResult" class="api-result"></pre>
+</section>
+
+<script>
+document.getElementById('postForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const groupName = document.getElementById('groupInput').value;
+
+    const response = await fetch('/api/low/group', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ groupName: groupName })
+    });
+
+    const result = await response.json();
+    document.getElementById('postResult').textContent = JSON.stringify(result, null, 2);
+});
+</script>
+
+<h4 style="margin-top: 2em;">Tillgängliga gruppnamn</h4>
+<ul id="availableGroups" style="columns: 2;"></ul>
+
+<script>
+async function loadAvailableGroups() {
+    const res = await fetch('/api/low/groups');
+    const groups = await res.json();
+
+    const list = document.getElementById('availableGroups');
+    list.innerHTML = '';
+    groups.forEach(group => {
+        const li = document.createElement('li');
+        li.textContent = group;
+        list.appendChild(li);
+    });
+}
+
+loadAvailableGroups();
+</script>
+{% endblock %}

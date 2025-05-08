@@ -1,0 +1,56 @@
+{% extends 'project/base_project.html.twig' %}
+
+{% block title %}Om projektet{% endblock %}
+
+{% block body %}
+<section class="page-section">
+    <h2>Om projektet</h2>
+
+    <p>
+        Det här är mitt avslutande projekt (kmom10) i mvc-kursen. Fokus ligger på att samla in och visa
+        statistik kring hållbar ekonomisk utveckling med hjälp av min egna applikation i Symfony.
+    </p>
+
+    <p>
+        Projektet utgår från Sveriges arbete med Agenda 2030. Jag har valt att fokusera på mål 1 –
+        <strong>ingen fattigdom</strong>. Det är ett grundläggande mål som påverkar mycket annat.
+        Att inte ha råd med det mest nödvändiga påverkar både hälsa, utbildning, trygghet och framtid <sup>[1]</sup>.
+        Samtidigt så överlappar många mål varandra. Jag kan till exempel enkelt se kopplingar här även till mål 5 -
+        <strong>jämställdhet</strong> och mål 10 - <strong>minskad ojämlikhet</strong>.
+    </p>
+
+    <p>
+        Jag använder statistik från <a href="https://www.scb.se" target="_blank">SCB</a>. Datan lagras i en
+        databas och presenteras i form av tabeller och grafer. På så sätt går det att följa trender över tid
+        och se vilka grupper som sticker ut.
+    </p>
+
+    <p>
+        Projektet använder PHP, Symfony, Twig, Doctrine och Webpack Encore. All min kod har också versionhanterats genom
+        Git. Jag har också lagt in enhetstester, kodanalys och ett eget JSON API.
+    </p>
+
+    <p>
+        Du hittar projektets startsida via <a href="{{ path('project_index') }}">start</a>. Det finns även
+        sidor för tabeller och grafer, där man kan filtrera fram olika grupper och se förändringar över tid.
+    </p>
+
+    <p>
+        Min förhoppning är att sidan inte bara visar siffror utan också väcker tankar. Jag har försökt göra
+        det enkelt att se mönster över tid och jämföra grupper. Det kan hjälpa oss att förstå vilka hushåll
+        som har det extra tufft. Även om den här kursen handlar om programmering så tycker jag det är viktigt
+        att fundera över de här problemen och varför de finns.
+    </p>
+
+    <h3 style="margin-top: 3em;">Källor</h3>
+    <ol>
+        <li>
+            Agenda 2030 – Mål 1: Ingen fattigdom.
+            <a href="https://www.globalamalen.se/om-globala-malen/mal-1-ingen-fattigdom/"
+               target="_blank">
+               globalamalen.se
+            </a>
+        </li>
+    </ol>
+</section>
+{% endblock %}

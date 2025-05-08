@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Projekt{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}">
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('project') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('project') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="site-header">
+            <h1>Projekt: Ekonomisk hållbarhet i Sverige</h1>
+            <p class="site-subtitle">Statistik, analys och visualisering från SCB och Agenda 2030</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li class="{% if app.request.attributes.get('_route') == 'project_index' %}active{% endif %}">
+                    <a href="{{ path('project_index') }}">Start</a>
+                </li>
+                <li class="{% if app.request.attributes.get('_route') == 'project_about' %}active{% endif %}">
+                    <a href="{{ path('project_about') }}">Om projektet</a>
+                </li>
+                <li class="{% if app.request.attributes.get('_route') == 'sustainability_index' %}active{% endif %}">
+                    <a href="{{ path('sustainability_index') }}">Ekonomisk hållbarhet</a>
+                </li>
+                <li class="{% if app.request.attributes.get('_route') == 'sustainability_graphs' %}active{% endif %}">
+                    <a href="{{ path('sustainability_graphs') }}">Grafer</a>
+                </li>
+                <li class="{% if app.request.attributes.get('_route') == 'project_api' %}active{% endif %}">
+                    <a href="{{ path('project_api') }}">API</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2025 – Ett projekt om hållbar ekonomisk utveckling</p>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </body>
+</html>

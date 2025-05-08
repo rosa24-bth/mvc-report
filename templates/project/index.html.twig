@@ -1,0 +1,25 @@
+{% extends 'project/base_project.html.twig' %}
+
+{% block title %}Hållbar utveckling{% endblock %}
+
+{% block body %}
+<section class="page-section">
+    <h2>Välkommen till projektet om ekonomisk hållbar utveckling</h2>
+
+    <p>
+        Denna webbplats är mitt slutprojekt i mvc-kursen. Den fokuserar på att
+        visualisera indikatorer för ekonomisk hållbar utveckling, baserat på data från SCB och Agenda 2030.
+    </p>
+
+    <p>
+        Här kommer du kunna ta del av statistik, grafer och analyser kring Sveriges arbete
+        för att uppnå de globala målen för hållbar utveckling.
+    </p>
+
+    <p>
+        Klicka dig gärna till
+        <a href="{{ path('project_about') }}">Om projektet</a>
+        för att läsa mer om syftet och upplägget.
+    </p>
+</section>
+{% endblock %}

@@ -1,0 +1,133 @@
+body {
+    background-color: #1e1e1e;
+    color: #f2f2f2;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0 auto;
+    max-width: 1000px;
+    padding-top: 1rem;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.site-header {
+    background: linear-gradient(to right, #004466, #001f33);
+    color: #e0f7fa;
+    padding: 2rem 1rem 1.2rem 1rem;
+    text-align: center;
+    border-bottom: 3px solid #00bcd4;
+}
+
+.site-header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.site-subtitle {
+    font-size: 1rem;
+    color: #b2ebf2;
+    margin-top: 0.5rem;
+}
+
+nav {
+    background-color: #1b1b1b;
+    border-top: 1px solid #333;
+    border-bottom: 2px solid #00bcd4;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    color: #f2f2f2;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: #00bcd4;
+}
+
+nav li.active a {
+    color: #00e6e6;
+    border-bottom: 2px solid #00e6e6;
+    padding-bottom: 2px;
+}
+
+main {
+    padding: 1rem;
+}
+
+h1, h2, h3 {
+    color: #00ccff;
+    margin-top: 2rem;
+}
+
+a {
+    color: #00ccff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    color: #aaa;
+    border-top: 1px solid #444;
+    margin-top: 2rem;
+}
+
+.page-section {
+    background-color: #2a2a2a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    line-height: 1.5;
+}
+
+.page-section p {
+    margin-bottom: 1rem;
+}
+
+.pivot-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.pivot-table th,
+.pivot-table td {
+    border: 1px solid #999;
+    padding: 0.5em;
+    text-align: right;
+}
+
+.pivot-table th:first-child,
+.pivot-table td:first-child {
+    text-align: left;
+}
+
+.api-result {
+    background: #111;
+    color: #f0f0f0;
+    padding: 1em;
+    border: 1px solid #444;
+    margin-top: 1em;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+}

@@ -156,6 +156,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-CardApiController.html#method_apiGame"
         },                {
+            "fqsen": "\\App\\Controller\\CardApiController\u003A\u003AbuildPlayerResponse\u0028\u0029",
+            "name": "buildPlayerResponse",
+            "summary": "",
+            "url": "classes/App-Controller-CardApiController.html#method_buildPlayerResponse"
+        },                {
             "fqsen": "\\App\\Controller\\CardApiController\u003A\u003AapiLibraryBooks\u0028\u0029",
             "name": "apiLibraryBooks",
             "summary": "",
