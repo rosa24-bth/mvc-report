@@ -207,6 +207,27 @@
                         <br>
 
                         <h2 id="kmom10">kmom10</h2>
+
+                        <h3>Krav 1–3: Webbplatsen</h3>
+                        <p>Jag skapade en ny landningssida för projektet som är helt separerad från min report-sida, både stilmässigt och strukturellt. Jag använde ny layout med egen navbar och ett annat utseende som tydligt visar att detta är en annan webbplats.</p>
+                        <p>På about-sidan förklarar jag syftet med projektet, vilka indikatorer som används och var datan kommer ifrån. Av navbaren för man en bra överblick med länkar vidare till grafer, API och analys.</p>
+                        <p>Jag skrev en README med beskrivning av projektet, instruktioner för installation samt klickbara badges till Scrutinizer för coverage, build och quality. Mitt betyg från Scrutinizer når nästan upp till 10, vilket jag är nöjd med.</p>
+                        <p>När det gäller tester och kodtäckning så vill jag flagga för att jag är medveten om att den totala kodtäckningen ligger på 37.95%. Men jag har valt att fokusera på de delar som faktiskt har med projektet att göra. Och tittar vi enbart på det så är jag gott och väl över 90%; faktiskt nästan på 100%.</p>
+                        <p>I övrigt så har jag försökt dela upp det logiskt enligt mvc-struktur. Projektet innehåller templates, entiteter och routes. Jag har även sett till att dokumentation och metrics har genererats.</p>
+
+                        <h3>Krav 4: JSON API</h3>
+                        <p>Jag har byggt ett JSON API med flera GET-routes för att kunna hämta statistik från databasen, exempelvis "Samtliga personer" och "Ensamstående kvinnor utan barn". Dessutom har jag en POST-route där man kan skicka in ett valfritt gruppnamn och få tillbaka alla matchande rader från tabellen LowEconomicStandard.</p>
+                        <p>För att förbättra användarupplevelsen fixade jag också dit en route till som returnerar alla tillgängliga gruppnamn i JSON-format. Precis som uppgiftsbeskrivaren var inne på så tog jag JavScript till hjälp i detta. Jag har testat alla routes för att säkerställa att API:t fungerar både lokalt och på studentservern.</p>
+
+                        <h3>Genomförandet av projektet</h3>
+                        <p>Projektet tog en del tid men var rätt kul att bygga. Det mesta gick att lösa stegvis, och jag hade stor nytta av allt vi gjort tidigare i kursen.</p>
+                        <p>Importen av datan gav mig både lite huvudbry men också lärdomar. Jag började med att utgå från Excel-format, vilket var det som datan kom i från början. Men jag valde att göra om det till CSV-format istället, vilket var en smidig lösning. Jag stötte också på problem med att Composer ville ha 64-bitars PHP, vilket stökade till det på studentservern. Det tog lite tid att felsöka, men när jag väl plockade bort PHPSpreadsheet så funkade allt. Visualisering och struktur blev snyggt till slut, och det var härligt när jag fick allt att funka med API:t, så det svarade korrekt på alla anrop!</p>
+
+                        <h3>Tankar om kursen</h3>
+                        <p>Kursen är väldigt lärorik, om än lite tung emellanåt. Men som med många andra kurser så är det mer tidsbristen och stressen än själva kursen i sig som ligger bakom det.</p>
+                        <p>Jag har överlag fått en väldigt bra introduktion till hur man bygger mer avancerat med PHP och Symfony. Jag tycker strukturen varit tydlig och materialen har hållit hög pedagogisk klass.</p>
+                        <p>Exempelkoden har varit värdefull att luta sig mot, och jag gillar att det finns frihet att bygga på sitt eget sätt men med bra riktlinjer. Discord och stödet därigenom är också väldigt uppskattat. Även om jag kanske inte skriver så mycket där så får jag ändå många bra tips som andra fått, som jag också har nytta av.</p>
+                        <p>Jag är som helhet nöjd med kursen och skulle absolut rekommendera den till andra. Så jag skulle sätta 9 av 10 i betyg!</p>
                 </div>
             </div>
 

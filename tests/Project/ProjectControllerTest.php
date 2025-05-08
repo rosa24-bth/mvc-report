@@ -12,8 +12,7 @@ class ProjectControllerTest extends WebTestCase
     public function testProjectIndexLoads()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/project');
-
+        $client->request('GET', '/project');
 
         // DEBUG
         if ($client->getResponse()->getStatusCode() !== 200) {
@@ -30,7 +29,7 @@ class ProjectControllerTest extends WebTestCase
     public function testProjectAboutLoads()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/project/about');
+        $client->request('GET', '/project/about');
 
         // DEBUG
         if ($client->getResponse()->getStatusCode() !== 200) {

@@ -4,7 +4,7 @@ namespace App\Command;
 
 use App\Entity\LowEconomicStandard;
 use App\Entity\LongtermEconomicSupport;
-use App\Service\FileLoader; // 🆕 Import för nya tjänsten
+use App\Service\FileLoader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -54,6 +54,9 @@ class ImportExcelDataCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        // Silence unused parameter warning
+        unset($input);
+
         // Directory where the CSV files are located.
         $basePath = __DIR__ . '/../../var/data/';
 
@@ -88,9 +91,10 @@ class ImportExcelDataCommand extends Command
             while (($data = fgetcsv($handle, 0, ",", '"', "\\")) !== false) {
                 // First column has the group names.
                 $groupName = $data[0];
+                $length = count($data);
 
                 // Loop through each year value in the row.
-                for ($i = 1; $i < count($data); $i++) {
+                for ($i = 1; $i < $length; $i++) {
                     $year = (int) $headers[$i];
                     $value = (float) str_replace(',', '.', $data[$i]);
 

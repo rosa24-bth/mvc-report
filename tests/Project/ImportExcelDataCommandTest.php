@@ -5,7 +5,6 @@ namespace App\Tests\Project;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Console\Output\OutputInterface;
 use App\Command\ImportExcelDataCommand;
 use App\Service\FileLoader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,17 +17,16 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class ImportExcelDataCommandTest extends KernelTestCase
 {
-    // Set up to make sure db is filled before testing.
     protected function setUp(): void
     {
         self::bootKernel();
         $container = static::getContainer();
 
+        $entityManager = $container->get(EntityManagerInterface::class);
+        $fileLoader = $container->get(FileLoader::class);
+
         $application = new Application();
-        $application->add(new ImportExcelDataCommand(
-            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
-            $container->get(FileLoader::class) ?? throw new \LogicException('FileLoader is null')
-        ));
+        $application->add(new ImportExcelDataCommand($entityManager, $fileLoader));
 
         $command = $application->find('app:import-csv-data');
         $commandTester = new CommandTester($command);
@@ -40,11 +38,11 @@ class ImportExcelDataCommandTest extends KernelTestCase
         self::bootKernel();
         $container = static::getContainer();
 
+        $entityManager = $container->get(EntityManagerInterface::class);
+        $fileLoader = $container->get(FileLoader::class);
+
         $application = new Application();
-        $command = new ImportExcelDataCommand(
-            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
-            $container->get(FileLoader::class) ?? throw new \LogicException('FileLoader is null')
-        );
+        $command = new ImportExcelDataCommand($entityManager, $fileLoader);
         $application->add($command);
 
         $commandTester = new CommandTester($application->find('app:import-csv-data'));
@@ -52,7 +50,6 @@ class ImportExcelDataCommandTest extends KernelTestCase
 
         $output = $commandTester->getDisplay();
 
-        // Check that expected strings exist in the output.
         $this->assertStringContainsString('Imported data from', $output);
         $this->assertStringContainsString('Done. Total imported rows:', $output);
     }
@@ -62,23 +59,11 @@ class ImportExcelDataCommandTest extends KernelTestCase
         self::bootKernel();
         $container = static::getContainer();
 
-        // Create new command that points to noexistent fake folder.
-        $command = new class(
-            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
-            $container->get(FileLoader::class) ?? throw new \LogicException('FileLoader is null')
-        ) extends ImportExcelDataCommand {
+        $entityManager = $container->get(EntityManagerInterface::class);
+        $fileLoader = $container->get(FileLoader::class);
+
+        $command = new class ($entityManager, $fileLoader) extends ImportExcelDataCommand {
             protected static $defaultName = 'app:import-test-missing';
-
-            // Save locally to be able to use in execute().
-            private EntityManagerInterface $entityManager;
-            private FileLoader $fileLoader;
-
-            public function __construct(EntityManagerInterface $entityManager, FileLoader $fileLoader)
-            {
-                parent::__construct($entityManager, $fileLoader);
-                $this->entityManager = $entityManager;
-                $this->fileLoader = $fileLoader;
-            }
 
             protected function configure(): void
             {
@@ -87,10 +72,12 @@ class ImportExcelDataCommandTest extends KernelTestCase
 
             protected function execute($input, $output): int
             {
+                unset($input);
+
                 $basePath = __DIR__ . '/fake-data/';
                 $files = ['missing.csv' => \App\Entity\LowEconomicStandard::class];
 
-                foreach ($files as $filename => $entityClass) {
+                foreach (array_keys($files) as $filename) {
                     $filePath = $basePath . $filename;
                     if (!file_exists($filePath)) {
                         $output->writeln("File not found: $filename");
@@ -115,6 +102,9 @@ class ImportExcelDataCommandTest extends KernelTestCase
         self::bootKernel();
         $container = static::getContainer();
 
+        $entityManager = $container->get(EntityManagerInterface::class);
+        $fileLoader = $container->get(FileLoader::class);
+
         $filename = __DIR__ . '/unreadable.csv';
 
         if (file_exists($filename)) {
@@ -123,26 +113,10 @@ class ImportExcelDataCommandTest extends KernelTestCase
         }
 
         file_put_contents($filename, 'header1,header2' . PHP_EOL . 'value1,value2');
-
-        // Change rights so we can not read.
         chmod($filename, 0000);
 
-        $command = new class(
-            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
-            $container->get(FileLoader::class) ?? throw new \LogicException('FileLoader is null')
-        ) extends ImportExcelDataCommand {
+        $command = new class ($entityManager, $fileLoader) extends ImportExcelDataCommand {
             protected static $defaultName = 'app:import-test-unreadable';
-
-            // Save locally to be able to use in execute().
-            private EntityManagerInterface $entityManager;
-            private FileLoader $fileLoader;
-
-            public function __construct(EntityManagerInterface $entityManager, FileLoader $fileLoader)
-            {
-                parent::__construct($entityManager, $fileLoader);
-                $this->entityManager = $entityManager;
-                $this->fileLoader = $fileLoader;
-            }
 
             protected function configure(): void
             {
@@ -151,6 +125,8 @@ class ImportExcelDataCommandTest extends KernelTestCase
 
             protected function execute($input, $output): int
             {
+                unset($input);
+
                 $filePath = __DIR__ . '/unreadable.csv';
                 if (!is_readable($filePath)) {
                     $output->writeln("Could not open file: unreadable.csv");
@@ -166,46 +142,25 @@ class ImportExcelDataCommandTest extends KernelTestCase
         $tester = new CommandTester($application->find('app:import-test-unreadable'));
         $tester->execute([]);
 
-        // Reset rights and unlink.
         chmod($filename, 0644);
         unlink($filename);
 
         $this->assertStringContainsString('Could not open file: unreadable.csv', $tester->getDisplay());
     }
 
-    /**
-     * Test that mocks the FileLoader so we can test importing CSV content without real files.
-     */
     public function testCommandUsesMockedFileLoader(): void
     {
         self::bootKernel();
         $container = static::getContainer();
 
+        $entityManager = $container->get(EntityManagerInterface::class);
         $mockFileLoader = $this->createMock(FileLoader::class);
 
-        // Fake CSV content.
-        $csvContent = [
-            ['Group', '2020', '2021'],
-            ['Group A', '10,5', '20,3'],
-        ];
+        $mockFileLoader->method('open')->willReturn($this->getMockedCsvStream());
 
-        // Fake stream.
-        $stream = fopen('php://memory', 'r+');
-        foreach ($csvContent as $row) {
-            fputcsv($stream, $row, ",", '"', "\\");
-        }
-        rewind($stream);
-
-        // Mock the open() method to return this stream.
-        $mockFileLoader->method('open')->willReturn($stream);
-
-        $command = new class(
-            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
-            $mockFileLoader
-        ) extends ImportExcelDataCommand {
+        $command = new class ($entityManager, $mockFileLoader) extends ImportExcelDataCommand {
             protected static $defaultName = 'app:import-test-mocked';
 
-            // Save locally to be able to use in execute().
             private EntityManagerInterface $entityManager;
             private FileLoader $fileLoader;
 
@@ -221,45 +176,51 @@ class ImportExcelDataCommandTest extends KernelTestCase
                 $this->setName(self::$defaultName);
             }
 
+            private function importFile(string $filename, string $entityClass, $output): int
+            {
+                $counter = 0;
+                $filePath = __DIR__ . '/' . $filename;
+                $handle = $this->fileLoader->open($filePath);
+                if (!$handle) {
+                    $output->writeln("Could not open file: $filename");
+                    return 0;
+                }
+
+                $headers = fgetcsv($handle, 0, ",", '"', "\\");
+                while (($data = fgetcsv($handle, 0, ",", '"', "\\")) !== false) {
+                    $groupName = $data[0];
+                    $length = count($data);
+                    for ($i = 1; $i < $length; $i++) {
+                        $year = (int) $headers[$i];
+                        $value = (float) str_replace(',', '.', $data[$i]);
+
+                        $entity = new $entityClass();
+                        $entity->setGroupName($groupName);
+                        $entity->setYear($year);
+                        $entity->setValue($value);
+
+                        $this->entityManager->persist($entity);
+                        $counter++;
+                    }
+                }
+
+                fclose($handle);
+                $output->writeln("Imported data from $filename.");
+
+                return $counter;
+            }
+
             protected function execute($input, $output): int
             {
+                unset($input);
+
                 $files = [
                     'low_economic_standard.csv' => \App\Entity\LowEconomicStandard::class
                 ];
 
                 $counter = 0;
-
                 foreach ($files as $filename => $entityClass) {
-                    // Have to skip file exists by forcing path.
-                    $filePath = __DIR__ . '/' . $filename;
-
-                    $handle = $this->fileLoader->open($filePath);
-                    if (!$handle) {
-                        $output->writeln("Could not open file: $filename");
-                        continue;
-                    }
-
-                    $headers = fgetcsv($handle, 0, ",", '"', "\\");
-
-                    while (($data = fgetcsv($handle, 0, ",", '"', "\\")) !== false) {
-                        $groupName = $data[0];
-                        $length = count($data);
-                        for ($i = 1; $i < $length; $i++) {
-                            $year = (int) $headers[$i];
-                            $value = (float) str_replace(',', '.', $data[$i]);
-
-                            $entity = new $entityClass();
-                            $entity->setGroupName($groupName);
-                            $entity->setYear($year);
-                            $entity->setValue($value);
-
-                            $this->entityManager->persist($entity);
-                            $counter++;
-                        }
-                    }
-
-                    fclose($handle);
-                    $output->writeln("Imported data from $filename.");
+                    $counter += $this->importFile($filename, $entityClass, $output);
                 }
 
                 $this->entityManager->flush();
@@ -277,5 +238,21 @@ class ImportExcelDataCommandTest extends KernelTestCase
 
         $this->assertStringContainsString('Imported data from low_economic_standard.csv', $tester->getDisplay());
         $this->assertStringContainsString('Done. Total imported rows: 2', $tester->getDisplay());
+    }
+
+    private function getMockedCsvStream(): mixed
+    {
+        $csvContent = [
+            ['Group', '2020', '2021'],
+            ['Group A', '10,5', '20,3'],
+        ];
+
+        $stream = fopen('php://memory', 'r+');
+        foreach ($csvContent as $row) {
+            fputcsv($stream, $row, ",", '"', "\\");
+        }
+        rewind($stream);
+
+        return $stream;
     }
 }

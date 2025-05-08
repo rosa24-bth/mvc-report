@@ -100,7 +100,7 @@ class ProjectApiController extends AbstractController
         $allData = $repo->findAll();
 
         // Extract unique group names using getGroupName().
-        $groupNames = array_unique(array_map(fn($row) => $row->getGroupName(), $allData));
+        $groupNames = array_unique(array_map(fn ($row) => $row->getGroupName(), $allData));
 
         // Sort alphabetically for easier reading.
         sort($groupNames);

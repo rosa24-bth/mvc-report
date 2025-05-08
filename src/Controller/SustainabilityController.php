@@ -36,8 +36,8 @@ class SustainabilityController extends AbstractController
         // array_merge combines the two lists of years into one big list. array_unique removes any duplicates
         // so each year only appears once. sort makes sure the years are in the right order.
         $years = array_unique(array_merge(
-            array_map(fn($row) => $row->getYear(), $lowData),
-            array_map(fn($row) => $row->getYear(), $longData)
+            array_map(fn ($row) => $row->getYear(), $lowData),
+            array_map(fn ($row) => $row->getYear(), $longData)
         ));
         sort($years);
 
@@ -81,15 +81,15 @@ class SustainabilityController extends AbstractController
         $longData = $longRepo->findAll();
 
         // Build sorted list of available groups for low economic data.
-        $lowGroups = array_unique(array_map(fn($row) => $row->getGroupName(), $lowData));
+        $lowGroups = array_unique(array_map(fn ($row) => $row->getGroupName(), $lowData));
         sort($lowGroups);
         $selectedGroup1 = $request->query->get('group1') ?? 'Samtliga personer';
 
         // Filter and sort rows for selected low group.
-        $lowFiltered = array_filter($lowData, fn($row) => $row->getGroupName() === $selectedGroup1);
-        usort($lowFiltered, fn($a, $b) => $a->getYear() <=> $b->getYear());
-        $chartLabels = array_map(fn($row) => $row->getYear(), $lowFiltered);
-        $chartValues = array_map(fn($row) => $row->getValue(), $lowFiltered);
+        $lowFiltered = array_filter($lowData, fn ($row) => $row->getGroupName() === $selectedGroup1);
+        usort($lowFiltered, fn ($firstRow, $secondRow) => $firstRow->getYear() <=> $secondRow->getYear());
+        $chartLabels = array_map(fn ($row) => $row->getYear(), $lowFiltered);
+        $chartValues = array_map(fn ($row) => $row->getValue(), $lowFiltered);
 
         // Apply min/max range for the chart Y-axis.
         $lowMin = min($chartValues);
@@ -98,14 +98,14 @@ class SustainabilityController extends AbstractController
         $lowSuggestedMax = ceil($lowMax + 1);
 
         // Build sorted list of available groups for long-term support data.
-        $longGroups = array_unique(array_map(fn($row) => $row->getGroupName(), $longData));
+        $longGroups = array_unique(array_map(fn ($row) => $row->getGroupName(), $longData));
         sort($longGroups);
         $selectedGroup2 = $request->query->get('group2') ?? 'Samtliga personer';
 
-        $longFiltered = array_filter($longData, fn($row) => $row->getGroupName() === $selectedGroup2);
-        usort($longFiltered, fn($a, $b) => $a->getYear() <=> $b->getYear());
-        $longLabels = array_map(fn($row) => $row->getYear(), $longFiltered);
-        $longValues = array_map(fn($row) => $row->getValue(), $longFiltered);
+        $longFiltered = array_filter($longData, fn ($row) => $row->getGroupName() === $selectedGroup2);
+        usort($longFiltered, fn ($rowA, $rowB) => $rowA->getYear() <=> $rowB->getYear());
+        $longLabels = array_map(fn ($row) => $row->getYear(), $longFiltered);
+        $longValues = array_map(fn ($row) => $row->getValue(), $longFiltered);
 
         $longMin = min($longValues);
         $longMax = max($longValues);

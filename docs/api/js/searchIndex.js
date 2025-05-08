@@ -116,6 +116,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-DeckOfCards.html#property_cards"
         },                {
+            "fqsen": "\\App\\Command\\ImportExcelDataCommand",
+            "name": "ImportExcelDataCommand",
+            "summary": "Command\u0020to\u0020import\u0020CSV\u0020files\u0020into\u0020the\u0020database.",
+            "url": "classes/App-Command-ImportExcelDataCommand.html"
+        },                {
+            "fqsen": "\\App\\Command\\ImportExcelDataCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor.",
+            "url": "classes/App-Command-ImportExcelDataCommand.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Command\\ImportExcelDataCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "Executes\u0020the\u0020import\u0020command.",
+            "url": "classes/App-Command-ImportExcelDataCommand.html#method_execute"
+        },                {
+            "fqsen": "\\App\\Command\\ImportExcelDataCommand\u003A\u003A\u0024entityManager",
+            "name": "entityManager",
+            "summary": "",
+            "url": "classes/App-Command-ImportExcelDataCommand.html#property_entityManager"
+        },                {
+            "fqsen": "\\App\\Command\\ImportExcelDataCommand\u003A\u003A\u0024fileLoader",
+            "name": "fileLoader",
+            "summary": "",
+            "url": "classes/App-Command-ImportExcelDataCommand.html#property_fileLoader"
+        },                {
             "fqsen": "\\App\\Controller\\CardApiController",
             "name": "CardApiController",
             "summary": "",
@@ -411,6 +436,81 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-ProductController.html#method_showProductByMinimumValue"
         },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController",
+            "name": "ProjectApiController",
+            "summary": "Controller\u0020for\u0020the\u0020JSON\u0020API\u0020with\u0020GET\u0020routes.",
+            "url": "classes/App-Controller-ProjectApiController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AlowSamtliga\u0028\u0029",
+            "name": "lowSamtliga",
+            "summary": "Get\u0020all\u0020rows\u0020for\u0020\u0022Samtliga\u0020personer\u0022\u0020from\u0020the\u0020LowEconomicStandard\u0020table.",
+            "url": "classes/App-Controller-ProjectApiController.html#method_lowSamtliga"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AlowWomenNoChildren\u0028\u0029",
+            "name": "lowWomenNoChildren",
+            "summary": "Get\u0020all\u0020rows\u0020for\u0020\u0022Ensamst\u00E5ende\u0020kvinnor\u0020utan\u0020barn\u0022\u0020from\u0020the\u0020LowEconomicStandard\u0020table.",
+            "url": "classes/App-Controller-ProjectApiController.html#method_lowWomenNoChildren"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AlongSamtliga\u0028\u0029",
+            "name": "longSamtliga",
+            "summary": "Get\u0020all\u0020rows\u0020for\u0020\u0022Samtliga\u0020personer\u0022\u0020from\u0020the\u0020LongtermEconomicSupport\u0020table.",
+            "url": "classes/App-Controller-ProjectApiController.html#method_longSamtliga"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AlongEjBoende\u0028\u0029",
+            "name": "longEjBoende",
+            "summary": "Get\u0020all\u0020rows\u0020for\u0020\u0022Ej\u0020boende\u0020med\u0020f\u00F6r\u00E4lder\u0022\u0020from\u0020the\u0020LongtermEconomicSupport\u0020table.",
+            "url": "classes/App-Controller-ProjectApiController.html#method_longEjBoende"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AlongChildrenOfSingleWomen\u0028\u0029",
+            "name": "longChildrenOfSingleWomen",
+            "summary": "Get\u0020all\u0020rows\u0020for\u0020\u0022Barn\u0020till\u0020ensamst\u00E5ende\u0020kvinnor\u0022\u0020from\u0020the\u0020LongtermEconomicSupport\u0020table.",
+            "url": "classes/App-Controller-ProjectApiController.html#method_longChildrenOfSingleWomen"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AlowByGroupPost\u0028\u0029",
+            "name": "lowByGroupPost",
+            "summary": "Get\u0020rows\u0020from\u0020LowEconomicStandard\u0020using\u0020a\u0020group\u0020name\u0020sent\u0020via\u0020POST.",
+            "url": "classes/App-Controller-ProjectApiController.html#method_lowByGroupPost"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AlowAllGroups\u0028\u0029",
+            "name": "lowAllGroups",
+            "summary": "Return\u0020all\u0020unique\u0020group\u0020names\u0020available\u0020in\u0020the\u0020LowEconomicStandard\u0020table\u0020for\u0020user\u0020experience\u0020smoothness.",
+            "url": "classes/App-Controller-ProjectApiController.html#method_lowAllGroups"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController",
+            "name": "ProjectController",
+            "summary": "Controller\u0020for\u0020project\u0020.",
+            "url": "classes/App-Controller-ProjectController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "Route\u0020for\u0020the\u0020project\u0020landing\u0020page.",
+            "url": "classes/App-Controller-ProjectController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Aabout\u0028\u0029",
+            "name": "about",
+            "summary": "Route\u0020for\u0020the\u0020about\u0020page\u0020that\u0020describes\u0020the\u0020project.",
+            "url": "classes/App-Controller-ProjectController.html#method_about"
+        },                {
+            "fqsen": "\\App\\Controller\\SustainabilityController",
+            "name": "SustainabilityController",
+            "summary": "Controller\u0020for\u0020sustainability\u0020views\u0020and\u0020data\u0020presentation.",
+            "url": "classes/App-Controller-SustainabilityController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\SustainabilityController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "Shows\u0020a\u0020table\u0020view\u0020of\u0020both\u0020economic\u0020indicators.",
+            "url": "classes/App-Controller-SustainabilityController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controller\\SustainabilityController\u003A\u003Agraphs\u0028\u0029",
+            "name": "graphs",
+            "summary": "Shows\u0020interactive\u0020graphs\u0020for\u0020both\u0020indicators,\u0020also\u0020add\u0020group\u0020selector.",
+            "url": "classes/App-Controller-SustainabilityController.html#method_graphs"
+        },                {
+            "fqsen": "\\App\\Controller\\SustainabilityController\u003A\u003Aapi\u0028\u0029",
+            "name": "api",
+            "summary": "Shows\u0020the\u0020API\u0020documentation\u0020page.",
+            "url": "classes/App-Controller-SustainabilityController.html#method_api"
+        },                {
             "fqsen": "\\App\\Controller\\TwentyOneController",
             "name": "TwentyOneController",
             "summary": "",
@@ -596,6 +696,126 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Entity-Book.html#property_image"
         },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport",
+            "name": "LongtermEconomicSupport",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#method_getId"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003AgetGroupName\u0028\u0029",
+            "name": "getGroupName",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#method_getGroupName"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003AsetGroupName\u0028\u0029",
+            "name": "setGroupName",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#method_setGroupName"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003AgetYear\u0028\u0029",
+            "name": "getYear",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#method_getYear"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003AsetYear\u0028\u0029",
+            "name": "setYear",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#method_setYear"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#method_getValue"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003AsetValue\u0028\u0029",
+            "name": "setValue",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#method_setValue"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#property_id"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003A\u0024groupName",
+            "name": "groupName",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#property_groupName"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003A\u0024year",
+            "name": "year",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#property_year"
+        },                {
+            "fqsen": "\\App\\Entity\\LongtermEconomicSupport\u003A\u003A\u0024value",
+            "name": "value",
+            "summary": "",
+            "url": "classes/App-Entity-LongtermEconomicSupport.html#property_value"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard",
+            "name": "LowEconomicStandard",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#method_getId"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003AgetGroupName\u0028\u0029",
+            "name": "getGroupName",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#method_getGroupName"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003AsetGroupName\u0028\u0029",
+            "name": "setGroupName",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#method_setGroupName"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003AgetYear\u0028\u0029",
+            "name": "getYear",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#method_getYear"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003AsetYear\u0028\u0029",
+            "name": "setYear",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#method_setYear"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#method_getValue"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003AsetValue\u0028\u0029",
+            "name": "setValue",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#method_setValue"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#property_id"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003A\u0024groupName",
+            "name": "groupName",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#property_groupName"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003A\u0024year",
+            "name": "year",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#property_year"
+        },                {
+            "fqsen": "\\App\\Entity\\LowEconomicStandard\u003A\u003A\u0024value",
+            "name": "value",
+            "summary": "",
+            "url": "classes/App-Entity-LowEconomicStandard.html#property_value"
+        },                {
             "fqsen": "\\App\\Entity\\Product",
             "name": "Product",
             "summary": "",
@@ -656,6 +876,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Repository-BookRepository.html#method___construct"
         },                {
+            "fqsen": "\\App\\Repository\\LongtermEconomicSupportRepository",
+            "name": "LongtermEconomicSupportRepository",
+            "summary": "",
+            "url": "classes/App-Repository-LongtermEconomicSupportRepository.html"
+        },                {
+            "fqsen": "\\App\\Repository\\LongtermEconomicSupportRepository\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Repository-LongtermEconomicSupportRepository.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Repository\\LowEconomicStandardRepository",
+            "name": "LowEconomicStandardRepository",
+            "summary": "",
+            "url": "classes/App-Repository-LowEconomicStandardRepository.html"
+        },                {
+            "fqsen": "\\App\\Repository\\LowEconomicStandardRepository\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Repository-LowEconomicStandardRepository.html#method___construct"
+        },                {
             "fqsen": "\\App\\Repository\\ProductRepository",
             "name": "ProductRepository",
             "summary": "",
@@ -675,6 +915,16 @@ Search.appendIndex(
             "name": "findByMinimumValue2",
             "summary": "Find\u0020all\u0020producs\u0020having\u0020a\u0020value\u0020above\u0020the\u0020specified\u0020one\u0020with\u0020SQL.",
             "url": "classes/App-Repository-ProductRepository.html#method_findByMinimumValue2"
+        },                {
+            "fqsen": "\\App\\Service\\FileLoader",
+            "name": "FileLoader",
+            "summary": "",
+            "url": "classes/App-Service-FileLoader.html"
+        },                {
+            "fqsen": "\\App\\Service\\FileLoader\u003A\u003Aopen\u0028\u0029",
+            "name": "open",
+            "summary": "Open\u0020a\u0020file\u0020for\u0020reading.",
+            "url": "classes/App-Service-FileLoader.html#method_open"
         },                {
             "fqsen": "\\App\\TwentyOneGame\\Bank",
             "name": "Bank",
@@ -776,6 +1026,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-card.html"
         },                {
+            "fqsen": "\\App\\Command",
+            "name": "Command",
+            "summary": "",
+            "url": "namespaces/app-command.html"
+        },                {
             "fqsen": "\\App\\Controller",
             "name": "Controller",
             "summary": "",
@@ -800,6 +1055,11 @@ Search.appendIndex(
             "name": "Repository",
             "summary": "",
             "url": "namespaces/app-repository.html"
+        },                {
+            "fqsen": "\\App\\Service",
+            "name": "Service",
+            "summary": "",
+            "url": "namespaces/app-service.html"
         },                {
             "fqsen": "\\App\\TwentyOneGame",
             "name": "TwentyOneGame",

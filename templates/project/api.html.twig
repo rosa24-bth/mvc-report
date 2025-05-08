@@ -62,7 +62,7 @@ document.getElementById('postForm').addEventListener('submit', async function (e
     e.preventDefault();
     const groupName = document.getElementById('groupInput').value;
 
-    const response = await fetch('/api/low/group', {
+    const response = await fetch('{{ path("api_low_post") }}', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ groupName: groupName })
@@ -78,7 +78,7 @@ document.getElementById('postForm').addEventListener('submit', async function (e
 
 <script>
 async function loadAvailableGroups() {
-    const res = await fetch('/api/low/groups');
+    const res = await fetch('{{ path("api_low_all_groups") }}');
     const groups = await res.json();
 
     const list = document.getElementById('availableGroups');

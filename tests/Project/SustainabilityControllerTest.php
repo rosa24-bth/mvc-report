@@ -12,7 +12,7 @@ class SustainabilityControllerTest extends WebTestCase
     public function testIndexPageLoads()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/sustainability');
+        $client->request('GET', '/sustainability');
 
         if ($client->getResponse()->getStatusCode() !== 200) {
             fwrite(STDERR, $client->getResponse()->getContent());
@@ -25,7 +25,7 @@ class SustainabilityControllerTest extends WebTestCase
     public function testGraphsPageLoadsWithCanvases()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/sustainability/graphs');
+        $client->request('GET', '/sustainability/graphs');
 
         if ($client->getResponse()->getStatusCode() !== 200) {
             fwrite(STDERR, $client->getResponse()->getContent());
