@@ -7,13 +7,12 @@ filter:
 build:
     image: default-bionic
 
-    environment:
-        APP_ENV: test
-        APP_DEBUG: 1
-
     nodes:
         my-tests:
             environment:
+                variables:
+                    APP_ENV: test
+                    APP_DEBUG: 0
                 php:
                     version: 8.3.3
                     # version: 8.1.13
