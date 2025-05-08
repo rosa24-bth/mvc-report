@@ -25,7 +25,10 @@ build:
                     #- phpcs-run # Not used, missing config file
     tests:
         override:
-            -   command: "php bin/console doctrine:migrations:migrate --no-interaction"
+            - rm var/test.db || true
+            - php bin/console doctrine:database:create --env=test
+            - php bin/console doctrine:migrations:migrate --env=test --no-interaction
+
             -   command: "composer phpunit"
                 # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1746703966">
-  <project timestamp="1746703966">
+<coverage generated="1746705765">
+  <project timestamp="1746705765">
     <file name="/Users/robin/dbwebb-kurser/mvc/me/report/src/Card/Card.php">
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="9" coveredelements="9"/>
@@ -40,14 +40,14 @@
       <line num="29" type="stmt" count="7"/>
       <line num="30" type="stmt" count="7"/>
       <line num="32" type="stmt" count="7"/>
-      <line num="33" type="stmt" count="1"/>
-      <line num="34" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="2"/>
       <line num="37" type="stmt" count="6"/>
       <line num="38" type="stmt" count="2"/>
       <line num="39" type="stmt" count="2"/>
       <line num="42" type="stmt" count="5"/>
-      <line num="43" type="stmt" count="1"/>
-      <line num="44" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="2"/>
+      <line num="44" type="stmt" count="2"/>
       <line num="47" type="stmt" count="5"/>
       <line num="48" type="stmt" count="1"/>
       <line num="49" type="stmt" count="1"/>
@@ -1003,7 +1003,7 @@
       <line num="24" type="stmt" count="2"/>
       <line num="25" type="stmt" count="2"/>
       <line num="28" type="stmt" count="2"/>
-      <line num="29" type="stmt" count="1"/>
+      <line num="29" type="stmt" count="2"/>
       <line num="33" type="method" name="getScore" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="35" type="stmt" count="1"/>
       <metrics loc="38" ncloc="37" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
