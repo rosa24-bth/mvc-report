@@ -6,10 +6,11 @@
         <link rel="icon" href="{{ asset('img/glider.svg') }}">
 
         {% block stylesheets %}
-            {% if app.debug %}
+            {% if app.environment != 'test' %}
                 {{ encore_entry_link_tags('project') }}
             {% endif %}
         {% endblock %}
+
     </head>
 
     <body>
@@ -47,7 +48,7 @@
         </footer>
 
         {% block javascripts %}
-            {% if app.debug %}
+            {% if app.environment != 'test' %}
                 {{ encore_entry_script_tags('project') }}
             {% endif %}
         {% endblock %}
