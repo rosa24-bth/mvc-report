@@ -14,6 +14,12 @@ class ProjectControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/project');
 
+
+        // DEBUG
+        if ($client->getResponse()->getStatusCode() !== 200) {
+            fwrite(STDERR, $client->getResponse()->getContent());
+        }
+
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains(
             'h2',
@@ -25,6 +31,11 @@ class ProjectControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/project/about');
+
+        // DEBUG
+        if ($client->getResponse()->getStatusCode() !== 200) {
+            fwrite(STDERR, $client->getResponse()->getContent());
+        }
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h2', 'Om projektet');

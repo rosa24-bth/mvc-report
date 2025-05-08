@@ -14,6 +14,10 @@ class SustainabilityControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/sustainability');
 
+        if ($client->getResponse()->getStatusCode() !== 200) {
+            fwrite(STDERR, $client->getResponse()->getContent());
+        }
+
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('table.pivot-table');
     }
@@ -22,6 +26,10 @@ class SustainabilityControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/sustainability/graphs');
+
+        if ($client->getResponse()->getStatusCode() !== 200) {
+            fwrite(STDERR, $client->getResponse()->getContent());
+        }
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('canvas#lowStandardChart');
@@ -32,6 +40,10 @@ class SustainabilityControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/proj/api');
+
+        if ($client->getResponse()->getStatusCode() !== 200) {
+            fwrite(STDERR, $client->getResponse()->getContent());
+        }
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h2', 'Projektets JSON API');
