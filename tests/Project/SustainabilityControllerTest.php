@@ -34,6 +34,6 @@ class SustainabilityControllerTest extends WebTestCase
         $client->request('GET', '/proj/api');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h2', 'API');
+        $this->assertSelectorTextContains('h2', 'Projektets JSON API');
     }
 }

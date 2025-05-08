@@ -15,7 +15,10 @@ class ProjectControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/project');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h2', 'Välkommen till projektet');
+        $this->assertSelectorTextContains(
+            'h2',
+            'Välkommen till projektet om ekonomisk hållbar utveckling'
+        );
     }
 
     public function testProjectAboutLoads()
