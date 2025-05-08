@@ -18,6 +18,23 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class ImportExcelDataCommandTest extends KernelTestCase
 {
+    // Set up to make sure db is filled before testing.
+    protected function setUp(): void
+    {
+        self::bootKernel();
+        $container = static::getContainer();
+
+        $application = new Application();
+        $application->add(new ImportExcelDataCommand(
+            $container->get(EntityManagerInterface::class),
+            $container->get(FileLoader::class)
+        ));
+
+        $command = $application->find('app:import-csv-data');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([]);
+    }
+
     public function testCommandOutputsSuccessMessage(): void
     {
         self::bootKernel();
