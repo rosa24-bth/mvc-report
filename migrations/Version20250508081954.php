@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250423070516 extends AbstractMigration
+final class Version20250508081954 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,6 +20,15 @@ final class Version20250423070516 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql(<<<'SQL'
+            CREATE TABLE book (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title VARCHAR(255) NOT NULL, isbn VARCHAR(25) NOT NULL, author VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL)
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE TABLE longterm_economic_support (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, group_name VARCHAR(255) NOT NULL, year INTEGER NOT NULL, value DOUBLE PRECISION NOT NULL)
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE TABLE low_economic_standard (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, group_name VARCHAR(255) NOT NULL, year INTEGER NOT NULL, value DOUBLE PRECISION NOT NULL)
+        SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE product (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL, value INTEGER NOT NULL)
         SQL);
@@ -43,6 +52,15 @@ final class Version20250423070516 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql(<<<'SQL'
+            DROP TABLE book
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE longterm_economic_support
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE low_economic_standard
+        SQL);
         $this->addSql(<<<'SQL'
             DROP TABLE product
         SQL);
