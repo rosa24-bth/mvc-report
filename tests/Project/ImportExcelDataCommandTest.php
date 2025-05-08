@@ -26,8 +26,8 @@ class ImportExcelDataCommandTest extends KernelTestCase
 
         $application = new Application();
         $application->add(new ImportExcelDataCommand(
-            $container->get(EntityManagerInterface::class),
-            $container->get(FileLoader::class)
+            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
+            $container->get(FileLoader::class) ?? throw new \LogicException('FileLoader is null')
         ));
 
         $command = $application->find('app:import-csv-data');
@@ -42,8 +42,8 @@ class ImportExcelDataCommandTest extends KernelTestCase
 
         $application = new Application();
         $command = new ImportExcelDataCommand(
-            $container->get(EntityManagerInterface::class),
-            $container->get(FileLoader::class)
+            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
+            $container->get(FileLoader::class) ?? throw new \LogicException('FileLoader is null')
         );
         $application->add($command);
 
@@ -64,8 +64,8 @@ class ImportExcelDataCommandTest extends KernelTestCase
 
         // Create new command that points to noexistent fake folder.
         $command = new class(
-            $container->get(EntityManagerInterface::class),
-            $container->get(FileLoader::class)
+            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
+            $container->get(FileLoader::class) ?? throw new \LogicException('FileLoader is null')
         ) extends ImportExcelDataCommand {
             protected static $defaultName = 'app:import-test-missing';
 
@@ -128,8 +128,8 @@ class ImportExcelDataCommandTest extends KernelTestCase
         chmod($filename, 0000);
 
         $command = new class(
-            $container->get(EntityManagerInterface::class),
-            $container->get(FileLoader::class)
+            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
+            $container->get(FileLoader::class) ?? throw new \LogicException('FileLoader is null')
         ) extends ImportExcelDataCommand {
             protected static $defaultName = 'app:import-test-unreadable';
 
@@ -200,7 +200,7 @@ class ImportExcelDataCommandTest extends KernelTestCase
         $mockFileLoader->method('open')->willReturn($stream);
 
         $command = new class(
-            $container->get(EntityManagerInterface::class),
+            $container->get(EntityManagerInterface::class) ?? throw new \LogicException('EntityManager is null'),
             $mockFileLoader
         ) extends ImportExcelDataCommand {
             protected static $defaultName = 'app:import-test-mocked';
@@ -243,7 +243,8 @@ class ImportExcelDataCommandTest extends KernelTestCase
 
                     while (($data = fgetcsv($handle, 0, ",", '"', "\\")) !== false) {
                         $groupName = $data[0];
-                        for ($i = 1; $i < count($data); $i++) {
+                        $length = count($data);
+                        for ($i = 1; $i < $length; $i++) {
                             $year = (int) $headers[$i];
                             $value = (float) str_replace(',', '.', $data[$i]);
 
