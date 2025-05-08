@@ -6,11 +6,15 @@
         <link rel="icon" href="{{ asset('img/glider.svg') }}">
 
         {% block stylesheets %}
-            {{ encore_entry_link_tags('project') }}
+            {% if app.environment != 'test' %}
+                {{ encore_entry_link_tags('project') }}
+            {% endif %}
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('project') }}
+            {% if app.environment != 'test' %}
+                {{ encore_entry_script_tags('project') }}
+            {% endif %}
         {% endblock %}
     </head>
     <body>
