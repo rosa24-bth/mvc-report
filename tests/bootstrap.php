@@ -5,6 +5,12 @@ use Symfony\Component\Filesystem\Filesystem;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
+// Create empty manifest.json if missing, for test env in CI.
+$manifestPath = dirname(__DIR__) . '/public/build/manifest.json';
+if (!file_exists($manifestPath)) {
+    (new Filesystem())->dumpFile($manifestPath, '{}');
+}
+
 (new Dotenv())->bootEnv(dirname(__DIR__).'/.env.test');
 
 // Initiate db with migrations.
